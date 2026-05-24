@@ -148,22 +148,69 @@
 
 <p>不是一刀切的"OTA 消失"，而是<strong>分层瓦解</strong>：</p>
 
-<pre><code>现在：
-  用户 → 携程 → 酒店
+<div style="margin:1.5rem 0;">
 
-短期：
-  用户 → Agent → 聚合搜索API（比价） → 携程 → 酒店
+<!-- 现在 -->
+<div style="background:#fff;border:1px solid #e0dbd2;padding:1rem 1.2rem;margin-bottom:0.8rem;border-radius:4px;">
+  <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
+    <span style="background:#e8e2d8;color:#666;font-size:0.75rem;padding:0.1rem 0.5rem;border-radius:2px;font-weight:600;">现在</span>
+    <span style="font-size:0.9rem;color:#555;">用户</span>
+    <span style="font-size:1.1rem;color:#bbb;">→</span>
+    <span style="font-size:0.9rem;font-weight:600;color:#c0392b;">携程</span>
+    <span style="font-size:1.1rem;color:#bbb;">→</span>
+    <span style="font-size:0.9rem;color:#555;">酒店</span>
+  </div>
+  <div style="margin-top:0.3rem;font-size:0.78rem;color:#999;">OTA 掌握完整链条：发现 → 信任 → 交易 → 售后</div>
+</div>
 
-中期：
-  用户 → Agent → 聚合搜索API（比价） → 酒店（直连）
-                    ↑
-              这里替代了 OTA 的发现层
+<!-- 短期 -->
+<div style="background:#fff;border:1px solid #e0dbd2;padding:1rem 1.2rem;margin-bottom:0.8rem;border-radius:4px;">
+  <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
+    <span style="background:#f0dbc0;color:#8a6d3b;font-size:0.75rem;padding:0.1rem 0.5rem;border-radius:2px;font-weight:600;">短期 1-2年</span>
+    <span style="font-size:0.9rem;color:#555;">用户</span>
+    <span style="font-size:1.1rem;color:#bbb;">→</span>
+    <span style="font-size:0.9rem;font-weight:600;color:#2980b9;">Agent</span>
+    <span style="font-size:1.1rem;color:#bbb;">→</span>
+    <span style="font-size:0.85rem;color:#888;">聚合搜索</span>
+    <span style="font-size:1.1rem;color:#bbb;">→</span>
+    <span style="font-size:0.9rem;color:#c0392b;">携程</span>
+    <span style="font-size:1.1rem;color:#bbb;">→</span>
+    <span style="font-size:0.9rem;color:#555;">酒店</span>
+  </div>
+  <div style="margin-top:0.3rem;font-size:0.78rem;color:#999;">Agent 成为比价入口，但交易和售后仍需 OTA 完成</div>
+</div>
 
-远期：
-  用户 → Agent → 酒店（自建 broadcast）
-         ↑
-   去中心化信用体系替代 OTA 的信任层
-</code></pre>
+<!-- 中期 -->
+<div style="background:#fff;border:1px solid #e0dbd2;padding:1rem 1.2rem;margin-bottom:0.8rem;border-radius:4px;border-left:3px solid #e67e22;">
+  <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
+    <span style="background:#e67e22;color:#fff;font-size:0.75rem;padding:0.1rem 0.5rem;border-radius:2px;font-weight:600;">中期 3-5年</span>
+    <span style="font-size:0.9rem;color:#555;">用户</span>
+    <span style="font-size:1.1rem;color:#bbb;">→</span>
+    <span style="font-size:0.9rem;font-weight:600;color:#2980b9;">Agent</span>
+    <span style="font-size:1.1rem;color:#bbb;">→</span>
+    <span style="font-size:0.85rem;color:#888;">聚合搜索</span>
+    <span style="font-size:1.1rem;color:#bbb;">→</span>
+    <span style="font-size:0.9rem;color:#27ae60;font-weight:600;">酒店（直连）</span>
+  </div>
+  <div style="margin-top:0.3rem;font-size:0.78rem;color:#e67e22;font-weight:600;">⬆ 这里替代了 OTA 的发现层</div>
+  <div style="margin-top:0.2rem;font-size:0.78rem;color:#999;">中大型酒店开始自建直连接口，OTA 的发现层价值被压缩</div>
+</div>
+
+<!-- 远期 -->
+<div style="background:#fff;border:1px solid #e0dbd2;padding:1rem 1.2rem;margin-bottom:0.8rem;border-radius:4px;border-left:3px solid #8e44ad;">
+  <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
+    <span style="background:#8e44ad;color:#fff;font-size:0.75rem;padding:0.1rem 0.5rem;border-radius:2px;font-weight:600;">远期 5-10年</span>
+    <span style="font-size:0.9rem;color:#555;">用户</span>
+    <span style="font-size:1.1rem;color:#bbb;">→</span>
+    <span style="font-size:0.9rem;font-weight:600;color:#2980b9;">Agent</span>
+    <span style="font-size:1.1rem;color:#bbb;">→</span>
+    <span style="font-size:0.9rem;color:#27ae60;font-weight:600;">酒店（自建 broadcast）</span>
+  </div>
+  <div style="margin-top:0.3rem;font-size:0.78rem;color:#8e44ad;font-weight:600;">⬆ 去中心化信用体系替代 OTA 的信任层</div>
+  <div style="margin-top:0.2rem;font-size:0.78rem;color:#999;">中大型酒店自建 broadcast，去中心化信用体系成熟</div>
+</div>
+
+</div>
 
 <h3>关键转折点</h3>
 
@@ -197,8 +244,15 @@
 
 <p>Trinity 现在做的事情，正是在走这条路：</p>
 
-<pre><code>Trinity PMS → 酒店数据 broadcast API → Agent → 用户
-</code></pre>
+<div style="background:#fff;border:1px solid #e0dbd2;padding:1rem 1.2rem;margin:1rem 0;border-radius:4px;border-left:3px solid #27ae60;text-align:center;">
+  <span style="font-size:0.9rem;color:#555;">Trinity PMS</span>
+  <span style="font-size:1.1rem;color:#bbb;margin:0 0.3rem;">→</span>
+  <span style="font-size:0.9rem;font-weight:600;color:#2980b9;">酒店数据 broadcast API</span>
+  <span style="font-size:1.1rem;color:#bbb;margin:0 0.3rem;">→</span>
+  <span style="font-size:0.9rem;font-weight:600;color:#c0392b;">Agent</span>
+  <span style="font-size:1.1rem;color:#bbb;margin:0 0.3rem;">→</span>
+  <span style="font-size:0.9rem;color:#555;">用户</span>
+</div>
 
 <p>如果你能让连入 Trinity 的酒店以标准化接口 broadcast 数据——价格、房态、设施、实时可用性——你就不需要经过任何 OTA。Agent 可以直接查你体系内的酒店，用户直接预订。</p>
 
