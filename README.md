@@ -16,9 +16,10 @@
 ### AI 知识管理
 4. [Synthadoc](./technologies/synthadoc.md) — LLM 文档→结构化 Wiki
 5. [llm_wiki](./technologies/llm-wiki.md) — 桌面知识库应用（Tauri + React + 知识图谱）
+6. [LightRAG](./technologies/lightrag.md) — 图增强检索生成系统（EMNLP 2025）
 
 ### 隐身与自动化
-6. [CloakBrowser](./technologies/cloakbrowser.md) — C++ 源码级隐身 Chromium
+7. [CloakBrowser](./technologies/cloakbrowser.md) — C++ 源码级隐身 Chromium
 
 ## 关于这份清单
 

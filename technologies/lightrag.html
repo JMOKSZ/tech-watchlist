@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LightRAG — 图检索增强生成 — Tech Watchlist</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; }
+  body {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+    background: #faf8f5;
+    color: #1a1a1a;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+  a { color: #2980b9; text-decoration: none; }
+  a:hover { color: #c0392b; text-decoration: underline; }
+  h1 { font-size: 2rem; font-weight: 400; margin-bottom: 0.3rem; color: #1a1a1a; letter-spacing: -0.01em; }
+  h2 { font-size: 1.3rem; font-weight: 500; margin: 2rem 0 0.8rem; color: #1a1a1a; padding-bottom: 0.3rem; border-bottom: 1px solid #e8e2d8; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin: 1.5rem 0 0.6rem; color: #333; }
+  p { margin-bottom: 0.8rem; color: #333; font-size: 0.95rem; }
+  table { width: 100%; border-collapse: collapse; margin: 0.8rem 0 1.2rem; font-size: 0.88rem; }
+  th, td { border: 1px solid #e0dbd2; padding: 0.4rem 0.7rem; text-align: left; vertical-align: top; }
+  th { background: #f0ebe3; font-weight: 600; color: #333; font-size: 0.85rem; }
+  td { background: #fff; }
+  tr:nth-child(even) td { background: #faf8f5; }
+  blockquote {
+    border-left: 3px solid #d5cfc5;
+    margin: 0.8rem 0;
+    padding: 0.5rem 1rem;
+    color: #555;
+    font-style: italic;
+    background: #f8f5f0;
+  }
+  ul, ol { margin: 0.5rem 0 0.8rem 1.5rem; color: #333; font-size: 0.95rem; }
+  li { margin-bottom: 0.3rem; }
+  code {
+    font-family: "SF Mono", "Fira Code", "Menlo", monospace;
+    font-size: 0.85rem;
+    background: #f0ebe3;
+    padding: 0.1rem 0.3rem;
+    border-radius: 2px;
+  }
+  pre {
+    background: #f0ebe3;
+    padding: 1rem;
+    margin: 0.8rem 0;
+    overflow-x: auto;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    border: 1px solid #e0dbd2;
+  }
+  pre code { background: none; padding: 0; }
+  hr { border: none; border-top: 1px solid #e0dbd2; margin: 2rem 0; }
+  .back { margin-bottom: 1.5rem; font-size: 0.85rem; }
+  .back a { color: #888; }
+  .back a:hover { color: #c0392b; }
+  footer {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.82rem;
+    color: #888;
+    font-style: italic;
+    border-top: 1px solid #e8e2d8;
+    padding-top: 1.5rem;
+  }
+  strong { color: #1a1a1a; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<p class="back"><a href="../index.html">← 返回 Tech Watchlist</a></p>
+
+<h1>LightRAG</h1>
+
+<blockquote>基于知识图谱的检索增强生成系统。不是传统向量 RAG，而是把文档建成实体关系图再检索。</blockquote>
+
+<h2>基本信息</h2>
+
+<table>
+<tr><th><strong>仓库</strong></th><th><a href="https://github.com/HKUDS/LightRAG" target="_blank">HKUDS/LightRAG</a></th></tr>
+<tr><td><strong>论文</strong></td><td><a href="https://arxiv.org/abs/2410.05779" target="_blank">arXiv 2410.05779</a> — EMNLP 2025</td></tr>
+<tr><td><strong>语言</strong></td><td>Python</td></tr>
+<tr><td><strong>Stars</strong></td><td>⭐ 35,600</td></tr>
+<tr><td><strong>Forks</strong></td><td>5,000</td></tr>
+<tr><td><strong>Commits</strong></td><td>7,853</td></tr>
+<tr><td><strong>安装</strong></td><td><code>uv pip install lightrag-hku</code> 或 <code>pip install lightrag-hku</code></td></tr>
+<tr><td><strong>许可证</strong></td><td>MIT (未明确标注，参考常见开源)</td></tr>
+</table>
+
+<h2>项目定位</h2>
+
+<p>LightRAG 是香港大学数据科学实验室（HKUDS）开发的图增强 RAG 系统。已发表于 EMNLP 2025。</p>
+
+<p>与<strong>传统 RAG</strong>（将文档切段 → 向量化 → 按相似度检索）不同，LightRAG 在索引阶段先让 LLM 从文档中提取<strong>实体</strong>和<strong>实体间关系</strong>，构建一个知识图谱（Knowledge Graph），然后在该图谱上进行检索。检索过程分<strong>双层级</strong>：</p>
+
+<ul>
+<li><strong>低级检索</strong> — 查具体实体（如"酒店 X 的评分"）</li>
+<li><strong>高级检索</strong> — 查主题/关系（如"深圳南山区酒店的整体竞争格局"）</li>
+</ul>
+
+<p>两个层级的检索结果合并后输入 LLM 生成答案。这种设计让 LLM 不仅能找到相关片段，还能理解实体之间的关联关系。</p>
+
+<h2>技术分析</h2>
+
+<h3>架构</h3>
+
+<pre><code>文档 → [LLM 实体+关系提取] → 知识图谱 (Neo4j / PostgreSQL / MongoDB / OpenSearch)
+                                        ↓
+用户查询 → [低级: 实体检索] + [高级: 关系检索] → [Reranker] → [LLM 生成] → 答案
+</code></pre>
+
+<h3>核心技术区别</h3>
+
+<table>
+<tr><th>维度</th><th>传统 RAG</th><th>LightRAG</th></tr>
+<tr><td>索引方式</td><td>切段→向量化→存储</td><td>提取实体+关系→建KG→存图+向量</td></tr>
+<tr><td>检索逻辑</td><td>向量相似度找段落</td><td>图遍历找关联实体 + 向量检索双通道</td></tr>
+<tr><td>跨文档关联</td><td>隐含在向量空间（不可解释）</td><td>显式实体关系链接（可解释）</td></tr>
+<tr><td>增量更新</td><td>重算或追加向量</td><td>✅ 增量更新 KG，无需全量重建</td></tr>
+</table>
+
+<h3>性能表现</h3>
+
+<p>LightRAG 在论文中全面优于 NaiveRAG、RQ-RAG、HyDE 和微软 GraphRAG：</p>
+
+<table>
+<tr><th>对比对象</th><th>综合得分</th><th>LightRAG 胜率</th></tr>
+<tr><td>vs NaiveRAG</td><td>40.0% → <strong>60.0%</strong></td><td>全维度领先</td></tr>
+<tr><td>vs RQ-RAG</td><td>40.0% → <strong>60.0%</strong></td><td>全维度领先</td></tr>
+<tr><td>vs HyDE</td><td>42.4% → <strong>57.6%</strong></td><td>全维度领先</td></tr>
+<tr><td>vs GraphRAG (微软)</td><td>50.4% → <strong>52.8%</strong></td><td>全面领先（CS/Legal/Agri 胜，Mix平）</td></tr>
+</table>
+
+<h3>存储后端</h3>
+
+<p>支持四种统一存储方案：Neo4j（图数据库原生）、PostgreSQL（含 pgvector）、MongoDB、OpenSearch</p>
+
+<h3>LLM 与嵌入要求</h3>
+
+<ul>
+<li><strong>LLM</strong>：推荐 ≥32B 参数，≥32K 上下文（64K 更佳）。索引阶段不建议使用推理模型</li>
+<li><strong>Embedding</strong>：推荐 BAAI/bge-m3 或 text-embedding-3-large</li>
+<li><strong>Reranker</strong>：可选，推荐 BAAI/bge-reranker-v2-m3 或 Jina</li>
+</ul>
+
+<h3>生态系统</h3>
+
+<table>
+<tr><th>项目</th><th>说明</th></tr>
+<tr><td>LightRAG</td><td>核心：图检索 RAG</td></tr>
+<tr><td>RAG-Anything</td><td>多模态 RAG（图像/表格/公式/MinerU/Docling）</td></tr>
+<tr><td>VideoRAG</td><td>超长视频理解 RAG</td></tr>
+<tr><td>MiniRAG</td><td>用小型模型运行 RAG</td></tr>
+</table>
+
+<h3>其他关键特性</h3>
+
+<ul>
+<li><strong>增量更新</strong> — 新文档只需更新相关实体，不重算全图</li>
+<li><strong>文档删除</strong> — 删除文档后自动重建 KG</li>
+<li><strong>角色分离</strong> — 支持为 EXTRACT（提取）、QUERY（查询）、KEYWORDS（关键词）、VLM（视觉）四个角色配置独立的 LLM</li>
+<li><strong>分块策略</strong> — 支持 Fix / Recursive / Vector / Paragraph 四种分块策略</li>
+<li><strong>WebUI 可视化</strong> — 知识图谱、拓扑布局、节点查询、子图过滤</li>
+<li><strong>Langfuse + RAGAS</strong> — 可观测性与评估集成</li>
+<li><strong>Docker + Kubernetes</strong> — 生产部署支持（Helm chart + Docker Compose）</li>
+<li><strong>Ollama 兼容 API</strong> — 可伪装为 Ollama 模型供 Open WebUI 等前端调用</li>
+</ul>
+
+<h2>与我相关</h2>
+
+<table>
+<tr><th>维度</th><th>评估</th></tr>
+<tr><td>Trinity 知识问答引擎</td><td>⭐⭐⭐⭐⭐ — 酒店知识的关系型检索，传统 RAG 做不到</td></tr>
+<tr><td>酒店竞对分析</td><td>⭐⭐⭐⭐⭐ — "哪些酒店跟我们是同档竞对"能从 KG 中推理</td></tr>
+<tr><td>知识图谱可视化</td><td>⭐⭐⭐⭐ — 自带 WebUI 可直接给团队用</td></tr>
+<tr><td>增量文档导入</td><td>⭐⭐⭐⭐⭐ — 酒店报告一篇篇增量加入即可</td></tr>
+<tr><td>部署成本</td><td>⭐⭐⭐ — 需要 ≥32B LLM + 存储后端，不是零配置方案</td></tr>
+</table>
+
+<h2>与已有关注项目的对比</h2>
+
+<table>
+<tr><th></th><th>Synthadoc</th><th>llm_wiki</th><th><strong>LightRAG</strong></th></tr>
+<tr><td>本质</td><td>文档→Wiki</td><td>知识库应用</td><td><strong>图检索 RAG</strong></td></tr>
+<tr><td>产出</td><td>人类可读的结构化 Wiki</td><td>Obsidian 兼容 Vault</td><td><strong>LLM 可检索的知识图谱</strong></td></tr>
+<tr><td>消费方式</td><td>人阅读</td><td>人阅读</td><td><strong>API → LLM 自动回答</strong></td></tr>
+<tr><td>Stars</td><td>⭐266</td><td>⭐9K</td><td><strong>⭐35.6K</strong></td></tr>
+<tr><td>互补而非替代</td><td>✅ 做文档预处理</td><td>✅ 做人工审核界面</td><td><strong>✅ 做智能检索引擎</strong></td></tr>
+</table>
+
+<p>三者可以串联使用：<strong>Synthadoc</strong> 做文档矛盾检测 → <strong>LightRAG</strong> 做知识图检索 → <strong>llm_wiki</strong> 做人类可读的展示/审核界面。</p>
+
+<h2>个人判断</h2>
+
+<p>这是当前已关注项目中社区最活跃（35.6K⭐/7.8K commits）、学术基础最扎实（EMNLP 2025）的一个。与 llm_wiki / Synthadoc 不在同一赛道——它们是知识管理，LightRAG 是智能检索。</p>
+
+<p>对于 Trinity 场景，如果目标是"人类阅读知识库"→ llm_wiki。如果目标是"让 LLM 能准确回答关于酒店数据的问题"→ <strong>LightRAG 是更好的选择</strong>。</p>
+
+<p>最大门槛是 LLM 需求（≥32B），但在 2026 年这已经不是问题。建议用 PostgreSQL 后端先本地跑一个 demo，拿几篇酒店报告实测。</p>
+
+<h2>TODO</h2>
+
+<ul>
+<li>[ ] 安装试用：<code>uv pip install lightrag-hku</code>，用 PostgreSQL 做存储后端</li>
+<li>[ ] 用 3-5 篇酒店竞对报告测试检索质量</li>
+<li>[ ] 评估能否与 Trinity 的豆包/PMS 后端集成</li>
+<li>[ ] 对比 Neo4j vs PostgreSQL 后端的性能差异</li>
+</ul>
+
+<footer>
+  <p>Trinity 项目协作 · <a href="lightrag.md">查看 Markdown 源文件</a></p>
+</footer>
+
+</div>
+</body>
+</html>
