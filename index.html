@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tech Watchlist</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; }
+  body {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+    background: #faf8f5;
+    color: #1a1a1a;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem; }
+  header { margin-bottom: 3rem; text-align: center; }
+  header h1 {
+    font-size: 2.4rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
+  }
+  header .subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  header .meta {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: #888;
+    font-style: italic;
+  }
+  .section-header {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #1a1a1a;
+    margin: 2.5rem 0 1.2rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid #e8e2d8;
+  }
+  .card {
+    background: #fff;
+    padding: 1.8rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: box-shadow 0.15s;
+  }
+  .card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .card h2 { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .card h2 a { color: #1a1a1a; text-decoration: none; }
+  .card h2 a:hover { color: #c0392b; }
+  .card .meta-line { font-size: 0.85rem; color: #888; margin-bottom: 0.6rem; }
+  .card .meta-line span { margin-right: 1rem; }
+  .card .desc { font-size: 0.95rem; color: #444; }
+  .card .verdict {
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 0.1rem 0.5rem;
+    margin-right: 0.3rem;
+    border-radius: 2px;
+    color: #fff;
+  }
+  .tag-hotel { background: #2980b9; }
+  .tag-ai { background: #8e44ad; }
+  .tag-tool { background: #27ae60; }
+  .tag-stealth { background: #c0392b; }
+  footer {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #888;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Tech Watchlist</h1>
+  <p class="subtitle">AI 时代值得关注的技术项目精选 — 分析摘要与个人判断</p>
+  <p class="meta">更新于 2026年5月 · 6 个项目</p>
+</header>
+
+<h2 class="section-header">🏨 酒店与商业技术</h2>
+
+<div class="card">
+  <h2><a href="./technologies/geoflow.md">① GEOFlow</a></h2>
+  <div class="meta-line">
+    <span>⭐ 1,721</span>
+    <span>PHP / Laravel</span>
+    <span class="tag tag-hotel">酒店</span>
+  </div>
+  <p class="desc">酒店 GEO 内容多平台分发系统。统一管理酒店描述、周边设施等地理信息，推送到不同 OTA 渠道。</p>
+  <p class="verdict">方法论值得研究，但 PHP 技术栈与 Trinity 不同。可吸收设计思想。</p>
+</div>
+
+<div class="card">
+  <h2><a href="./technologies/mega-asr.md">② Mega-ASR</a></h2>
+  <div class="meta-line">
+    <span>⭐ 350</span>
+    <span>1.7B 参数</span>
+    <span class="tag tag-hotel">酒店</span>
+    <span class="tag tag-ai">AI</span>
+  </div>
+  <p class="desc">抗噪语音识别模型，覆盖 7 类 54 种声学污染。专为嘈杂环境（酒店大堂、餐厅）设计的 ASR 方案。</p>
+  <p class="verdict">与 MiniCPM-V 配合可覆盖酒店视觉+听觉双维度。边缘部署潜力大。</p>
+</div>
+
+<div class="card">
+  <h2><a href="./technologies/amap-lbs.md">③ amap-lbs</a></h2>
+  <div class="meta-line">
+    <span style="color:#27ae60">✅ 已安装</span>
+    <span>Hermes Agent 技能</span>
+    <span class="tag tag-hotel">酒店</span>
+  </div>
+  <p class="desc">高德地图 LBS 综合服务：POI 搜索、路径规划、热力图、旅游规划。作为 Trinity 的标准数据源。</p>
+  <p class="verdict">最现成的工具，只需配置 API Key 即可全功能调用。优先使用。</p>
+</div>
+
+<h2 class="section-header">🧠 AI 知识管理</h2>
+
+<div class="card">
+  <h2><a href="./technologies/synthadoc.md">④ Synthadoc</a></h2>
+  <div class="meta-line">
+    <span>⭐ 266</span>
+    <span>Python CLI</span>
+    <span class="tag tag-ai">AI</span>
+    <span class="tag tag-tool">工具</span>
+  </div>
+  <p class="desc">LLM 驱动文档 → 结构化 Wiki。核心能力：矛盾检测、来源追溯、实体/概念自动提取。</p>
+  <p class="verdict">适合做文档预处理上游。与 llm_wiki 配合使用效果最佳。</p>
+</div>
+
+<div class="card">
+  <h2><a href="./technologies/llm-wiki.md">⑤ llm_wiki</a></h2>
+  <div class="meta-line">
+    <span>⭐ 9,000</span>
+    <span>Tauri + React + Rust</span>
+    <span class="tag tag-ai">AI</span>
+    <span class="tag tag-tool">工具</span>
+  </div>
+  <p class="desc">完整桌面知识库应用。知识图谱可视化、Louvain 社群检测、Deep Research、Chrome 剪藏、多格式文档支持。</p>
+  <p class="verdict">六项目中最适合做 Trinity 知识后台的方案。注意 GPL v3 许可证。</p>
+</div>
+
+<h2 class="section-header">🕵️ 隐身与自动化</h2>
+
+<div class="card">
+  <h2><a href="./technologies/cloakbrowser.md">⑥ CloakBrowser</a></h2>
+  <div class="meta-line">
+    <span>⭐ 19,500</span>
+    <span>Python / JS + C++</span>
+    <span class="tag tag-stealth">隐身</span>
+    <span class="tag tag-tool">工具</span>
+  </div>
+  <p class="desc">C++ 源码级隐身 Chromium，58 个 source-level patch。通过全部 30 项反爬检测，reCAPTCHA v3 得分 0.9。</p>
+  <p class="verdict">目前最成熟的隐身浏览器方案。当前不急，但作为战略储备——pip install 即可上线。</p>
+</div>
+
+<footer>
+  <p>由 James Mok 的 Hermes Agent 维护 · 自动更新</p>
+</footer>
+
+</div>
+</body>
+</html>
