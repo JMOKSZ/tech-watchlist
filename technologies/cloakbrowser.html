@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CloakBrowser — 隐身 Chromium — Tech Watchlist</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; }
+  body {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+    background: #faf8f5;
+    color: #1a1a1a;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+  a { color: #2980b9; text-decoration: none; }
+  a:hover { color: #c0392b; text-decoration: underline; }
+  h1 { font-size: 2rem; font-weight: 400; margin-bottom: 0.3rem; color: #1a1a1a; letter-spacing: -0.01em; }
+  h2 { font-size: 1.3rem; font-weight: 500; margin: 2rem 0 0.8rem; color: #1a1a1a; padding-bottom: 0.3rem; border-bottom: 1px solid #e8e2d8; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin: 1.5rem 0 0.6rem; color: #333; }
+  p { margin-bottom: 0.8rem; color: #333; font-size: 0.95rem; }
+  table { width: 100%; border-collapse: collapse; margin: 0.8rem 0 1.2rem; font-size: 0.88rem; }
+  th, td { border: 1px solid #e0dbd2; padding: 0.4rem 0.7rem; text-align: left; vertical-align: top; }
+  th { background: #f0ebe3; font-weight: 600; color: #333; font-size: 0.85rem; }
+  td { background: #fff; }
+  tr:nth-child(even) td { background: #faf8f5; }
+  blockquote {
+    border-left: 3px solid #d5cfc5;
+    margin: 0.8rem 0;
+    padding: 0.5rem 1rem;
+    color: #555;
+    font-style: italic;
+    background: #f8f5f0;
+  }
+  ul, ol { margin: 0.5rem 0 0.8rem 1.5rem; color: #333; font-size: 0.95rem; }
+  li { margin-bottom: 0.3rem; }
+  code {
+    font-family: "SF Mono", "Fira Code", "Menlo", monospace;
+    font-size: 0.85rem;
+    background: #f0ebe3;
+    padding: 0.1rem 0.3rem;
+    border-radius: 2px;
+  }
+  pre {
+    background: #f0ebe3;
+    padding: 1rem;
+    margin: 0.8rem 0;
+    overflow-x: auto;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    border: 1px solid #e0dbd2;
+  }
+  pre code { background: none; padding: 0; }
+  hr { border: none; border-top: 1px solid #e0dbd2; margin: 2rem 0; }
+  .back { margin-bottom: 1.5rem; font-size: 0.85rem; }
+  .back a { color: #888; }
+  .back a:hover { color: #c0392b; }
+  footer {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.82rem;
+    color: #888;
+    font-style: italic;
+    border-top: 1px solid #e8e2d8;
+    padding-top: 1.5rem;
+  }
+  strong { color: #1a1a1a; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<p class="back"><a href="../index.html">← 返回 Tech Watchlist</a></p>
+
+<h1>CloakBrowser</h1>
+
+<blockquote>C++ 源码级隐身的 Chromium 浏览器，通过全部 30 项反爬检测。</blockquote>
+
+<h2>基本信息</h2>
+
+<table>
+<tr><th><strong>仓库</strong></th><th><a href="https://github.com/CloakHQ/CloakBrowser" target="_blank">CloakHQ/CloakBrowser</a></th></tr>
+<tr><td><strong>语言</strong></td><td>Python + JavaScript（wrapper） / C++（patched Chromium 二进制）</td></tr>
+<tr><td><strong>Stars</strong></td><td>⭐ 19,500</td></tr>
+<tr><td><strong>Forks</strong></td><td>1,500</td></tr>
+<tr><td><strong>许可证</strong></td><td>MIT（wrapper）/ 免费使用（二进制）</td></tr>
+<tr><td><strong>安装</strong></td><td><code>pip install cloakbrowser</code> 或 <code>npm install cloakbrowser</code></td></tr>
+<tr><td><strong>最新版本</strong></td><td>v0.3.30 (Chromium 146)</td></tr>
+<tr><td><strong>平台</strong></td><td>Linux x64/arm64, macOS arm64/x64, Windows x64</td></tr>
+</table>
+
+<h2>项目定位</h2>
+
+<p>一个在 C++ 源码层修改 Chromium（58 处 source-level patch）的隐身浏览器，让反爬系统认为它就是正常 Chrome。<strong>不是 JS 注入（playwright-stealth 那种），不是配置修改（undetected-chromedriver 那种）</strong>——patches 编译进二进制文件，反爬系统无法从运行时检测。</p>
+
+<p>它是 Drop-in 替代 Playwright/Puppeteer：同一套 API，改个 import 就行。</p>
+
+<h2>技术分析</h2>
+
+<h3>隐身能力</h3>
+
+<table>
+<tr><th>检测服务</th><th>原生 Playwright</th><th>CloakBrowser</th></tr>
+<tr><td>reCAPTCHA v3</td><td>0.1 (bot)</td><td><strong>0.9</strong> (human)</td></tr>
+<tr><td>Cloudflare Turnstile</td><td>FAIL</td><td><strong>PASS</strong></td></tr>
+<tr><td>FingerprintJS</td><td>DETECTED</td><td><strong>PASS</strong></td></tr>
+<tr><td>BrowserScan</td><td>DETECTED</td><td><strong>NORMAL</strong> (4/4)</td></tr>
+<tr><td>deviceandbrowserinfo.com</td><td>6 true flags</td><td><strong>0 true flags</strong></td></tr>
+<tr><td><code>navigator.webdriver</code></td><td><code>true</code></td><td><strong><code>false</code></strong></td></tr>
+</table>
+
+<h3>核心特性</h3>
+
+<ol>
+<li><strong>58 个 C++ 源码级 patch</strong> — canvas, WebGL, audio, fonts, GPU, screen, WebRTC, 网络时序, automation 信号, CDP 输入行为</li>
+<li><strong>humanize=True</strong> — 一行开启人类行为模拟：贝塞尔曲线鼠标轨迹、打字节奏、滚动加减速</li>
+<li><strong>指纹管理</strong> — 随机 seed（每启动新身份）或固定 seed（保持同一身份反复访问）</li>
+<li><strong>代理支持</strong> — HTTP / SOCKS5 原生支持，<code>geoip=True</code> 自动匹配代理 IP 时区/语言环境</li>
+<li><strong>自动更新二进制</strong> — 后台更新检查，始终使用最新 stealth build</li>
+<li><strong>零配置</strong> — <code>pip install</code> → 二进制自动下载 → 直接用</li>
+</ol>
+
+<h3>额外配套</h3>
+
+<ul>
+<li><strong>Browser Profile Manager</strong> — 自托管替代 Multilogin/GoLogin/AdsPower，Docker 一键部署 + noVNC</li>
+<li><strong>CDP Server 模式</strong> — Docker 运行持久隐身浏览器，远程通过 CDP 连接</li>
+<li><strong>框架集成</strong> — 与 browser-use (70K⭐), Crawl4AI (58K⭐), Scrapling (21K⭐), Stagehand, LangChain, Selenium 等兼容</li>
+</ul>
+
+<h2>与现有方案对比</h2>
+
+<table>
+<tr><th>方案</th><th>隐身方式</th><th>reCAPTCHA</th><th>Turnstile</th><th>维护状态</th></tr>
+<tr><td>playwright-stealth</td><td>JS 注入</td><td>0.3-0.5</td><td>偶尔</td><td>停滞</td></tr>
+<tr><td>undetected-chromedriver</td><td>配置 patch</td><td>0.3-0.7</td><td>偶尔</td><td>停滞</td></tr>
+<tr><td>Camoufox</td><td>C++ (Firefox)</td><td>0.7-0.9</td><td>PASS</td><td>不稳定 beta</td></tr>
+<tr><td><strong>CloakBrowser</strong></td><td><strong>C++ (Chromium)</strong></td><td><strong>0.9</strong></td><td><strong>PASS</strong></td><td><strong>活跃</strong></td></tr>
+</table>
+
+<h2>与我相关</h2>
+
+<table>
+<tr><th>维度</th><th>评估</th></tr>
+<tr><td>酒店数据采集</td><td>⭐⭐⭐⭐ — 爬 OTA 站的数据采集隐身层</td></tr>
+<tr><td>Trinity 爬虫</td><td>⭐⭐⭐⭐ — 可作批量采集的底层引擎</td></tr>
+<tr><td>AI Agent 浏览</td><td>⭐⭐⭐⭐⭐ — 配合 browser-use 做自动化竞对分析</td></tr>
+<tr><td>价值</td><td>不是当前急需，但有战略储备价值</td></tr>
+</table>
+
+<h2>个人判断</h2>
+
+<p>对于现在 Trip.com UK 的酒店价格采集，CloakBrowser 不会有实质性改善——那站反爬本来就弱，瓶颈在业务逻辑和 IP 信誉，不在隐身能力。但作为工具链储备：等需要爬更硬的站（DataDome/Akamai/Kasada）或做 AI 自主浏览时，<code>pip install cloakbrowser</code> 就能上，无需重写代码。</p>
+
+<p>最大的价值在 <strong>browser-use / Crawl4AI 的隐身层</strong> + <strong>指纹管理（固定 seed 做回头客身份）</strong> + <strong>Docker 多实例并发</strong>。</p>
+
+<h2>竞品/替代</h2>
+
+<ul>
+<li>Camoufox（Firefox 版，但 beta 不稳定）</li>
+<li>playwright-stealth（JS 注入，已停滞）</li>
+<li>无更成熟的 Chromium 源级隐身方案</li>
+</ul>
+
+<h2>TODO</h2>
+
+<ul>
+<li>[ ] 在 Trinity 有批量采集需求时引入</li>
+<li>[ ] 评估 Docker CDP Server 模式用于并发采集的架构</li>
+</ul>
+
+<footer>
+  <p>Trinity 项目协作 · <a href="cloakbrowser.md">查看 Markdown 源文件</a></p>
+</footer>
+
+</div>
+</body>
+</html>

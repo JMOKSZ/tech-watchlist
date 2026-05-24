@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>llm_wiki — 桌面知识库应用 — Tech Watchlist</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; }
+  body {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+    background: #faf8f5;
+    color: #1a1a1a;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+  a { color: #2980b9; text-decoration: none; }
+  a:hover { color: #c0392b; text-decoration: underline; }
+  h1 { font-size: 2rem; font-weight: 400; margin-bottom: 0.3rem; color: #1a1a1a; letter-spacing: -0.01em; }
+  h2 { font-size: 1.3rem; font-weight: 500; margin: 2rem 0 0.8rem; color: #1a1a1a; padding-bottom: 0.3rem; border-bottom: 1px solid #e8e2d8; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin: 1.5rem 0 0.6rem; color: #333; }
+  p { margin-bottom: 0.8rem; color: #333; font-size: 0.95rem; }
+  table { width: 100%; border-collapse: collapse; margin: 0.8rem 0 1.2rem; font-size: 0.88rem; }
+  th, td { border: 1px solid #e0dbd2; padding: 0.4rem 0.7rem; text-align: left; vertical-align: top; }
+  th { background: #f0ebe3; font-weight: 600; color: #333; font-size: 0.85rem; }
+  td { background: #fff; }
+  tr:nth-child(even) td { background: #faf8f5; }
+  blockquote {
+    border-left: 3px solid #d5cfc5;
+    margin: 0.8rem 0;
+    padding: 0.5rem 1rem;
+    color: #555;
+    font-style: italic;
+    background: #f8f5f0;
+  }
+  ul, ol { margin: 0.5rem 0 0.8rem 1.5rem; color: #333; font-size: 0.95rem; }
+  li { margin-bottom: 0.3rem; }
+  code {
+    font-family: "SF Mono", "Fira Code", "Menlo", monospace;
+    font-size: 0.85rem;
+    background: #f0ebe3;
+    padding: 0.1rem 0.3rem;
+    border-radius: 2px;
+  }
+  pre {
+    background: #f0ebe3;
+    padding: 1rem;
+    margin: 0.8rem 0;
+    overflow-x: auto;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    border: 1px solid #e0dbd2;
+  }
+  pre code { background: none; padding: 0; }
+  hr { border: none; border-top: 1px solid #e0dbd2; margin: 2rem 0; }
+  .back { margin-bottom: 1.5rem; font-size: 0.85rem; }
+  .back a { color: #888; }
+  .back a:hover { color: #c0392b; }
+  footer {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.82rem;
+    color: #888;
+    font-style: italic;
+    border-top: 1px solid #e8e2d8;
+    padding-top: 1.5rem;
+  }
+  strong { color: #1a1a1a; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<p class="back"><a href="../index.html">← 返回 Tech Watchlist</a></p>
+
+<h1>llm_wiki</h1>
+
+<blockquote>基于 Karpathy 模式构建的桌面知识库应用，Tauri + React + Rust。</blockquote>
+
+<h2>基本信息</h2>
+
+<table>
+<tr><th><strong>仓库</strong></th><th><a href="https://github.com/nashsu/llm_wiki" target="_blank">nashsu/llm_wiki</a></th></tr>
+<tr><td><strong>技术栈</strong></td><td>Tauri v2 (Rust) + React 19 + TypeScript + Vite</td></tr>
+<tr><td><strong>Stars</strong></td><td>⭐ 9,000</td></tr>
+<tr><td><strong>Forks</strong></td><td>1,100</td></tr>
+<tr><td><strong>许可证</strong></td><td>GPL v3</td></tr>
+<tr><td><strong>最新版本</strong></td><td>v0.4.12（5 天前）</td></tr>
+<tr><td><strong>安装</strong></td><td>dmg / msi / deb / AppImage 或源码构建</td></tr>
+<tr><td><strong>定位</strong></td><td>增量构建持久知识库，替代传统 RAG</td></tr>
+</table>
+
+<h2>项目定位</h2>
+
+<p>LLM Wiki 将你的文档自动转化为结构化的、相互链接的知识库。与传统 RAG（每次查询重新检索）不同，LLM <strong>增量构建并维护</strong>一个持续更新的 Wiki 体系。知识被编译一次并保持更新，而不是每次查询都重新推导。</p>
+
+<p>基于 Karpathy 的 <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank">LLM Wiki 设计模式</a>，但实现了完整的桌面应用。</p>
+
+<h2>技术分析</h2>
+
+<h3>架构特点</h3>
+
+<p><strong>三层架构：</strong> Raw Sources（不可变原文） → Wiki（LLM 生成的页面） → Schema（规则与配置）</p>
+
+<p><strong>双步 CoT Ingest：</strong></p>
+<ol>
+<li><strong>分析步骤</strong> — LLM 读取原文 → 结构化分析（实体/概念/矛盾/与现有知识的关系）</li>
+<li><strong>生成步骤</strong> — LLM 根据分析 → 生成 Wiki 页面 + 交叉引用 + 索引</li>
+</ol>
+
+<p><strong>知识图谱（4 信号相关性模型）：</strong></p>
+<table>
+<tr><th>信号</th><th>权重</th><th>说明</th></tr>
+<tr><td>直接链接</td><td>×3.0</td><td>[[wikilinks]] 交叉引用</td></tr>
+<tr><td>来源重叠</td><td>×4.0</td><td>共享同一原始文档</td></tr>
+<tr><td>Adamic-Adar</td><td>×1.5</td><td>共同邻居节点</td></tr>
+<tr><td>类型亲缘</td><td>×1.0</td><td>同类型页面（实体+实体）</td></tr>
+</table>
+
+<h3>关键差异点（对比 Synthadoc / Hermes skill）</h3>
+
+<table>
+<tr><th>特性</th><th>Hermes skill</th><th>Synthadoc</th><th>llm_wiki</th></tr>
+<tr><td>图形界面</td><td>❌</td><td>❌</td><td>✅ Tauri 桌面</td></tr>
+<tr><td>知识图谱可视化</td><td>❌</td><td>❌</td><td>✅ sigma.js + ForceAtlas2</td></tr>
+<tr><td>Louvain 社群检测</td><td>❌</td><td>❌</td><td>✅ 自动知识聚类</td></tr>
+<tr><td>Deep Research</td><td>❌</td><td>❌</td><td>✅ Tavily/SerpApi 联网搜索</td></tr>
+<tr><td>多格式文档</td><td>❌</td><td>❌</td><td>✅ PDF/DOCX/PPTX/XLSX</td></tr>
+<tr><td>Chrome 剪藏</td><td>❌</td><td>❌</td><td>✅ Manifest V3 扩展</td></tr>
+<tr><td>向量搜索</td><td>❌</td><td>❌</td><td>✅ 可选 LanceDB</td></tr>
+<tr><td>本地 HTTP API</td><td>❌</td><td>❌</td><td>✅ 可被 AI Agent 调用</td></tr>
+<tr><td>增量缓存</td><td>❌</td><td>❌</td><td>✅ SHA256 去重</td></tr>
+<tr><td>多轮对话+引用</td><td>❌</td><td>❌</td><td>✅ 独立会话+溯源</td></tr>
+<tr><td>中英文</td><td>✅</td><td>❌</td><td>✅ i18n</td></tr>
+</table>
+
+<h3>额外亮点</h3>
+
+<ul>
+<li><strong>purpose.md</strong> — 比 schema 多一层"为什么建这个 Wiki"，LLM 每次 ingest/query 都读取，方向感更强</li>
+<li><strong>Graph Insights</strong> — 自动发现"异常连接"和"知识盲区"，一键触发 Deep Research</li>
+<li><strong>Review 系统</strong> — 异步人工审核队列，LLM 在 ingest 过程中标记需要人类判断的事项</li>
+<li><strong>KaTeX 数学渲染</strong> — 支持 $\LaTeX$ 公式（但不一定与你的场景相关）</li>
+<li><strong>可配置上下文</strong> — 4K 到 1M token 滑动条，适配不同 LLM</li>
+</ul>
+
+<h2>与我相关</h2>
+
+<table>
+<tr><th>维度</th><th>评估</th></tr>
+<tr><td>Trinity 知识后台</td><td>⭐⭐⭐⭐⭐ — 最适合做文档知识库的骨架</td></tr>
+<tr><td>酒店运营文档管理</td><td>⭐⭐⭐⭐ — 持续 ingest 酒店政策、竞对报告、行业研究</td></tr>
+<tr><td>API 集成</td><td>⭐⭐⭐⭐ — 本地 API 可被豆包/PMS 调用</td></tr>
+<tr><td>价值</td><td>高——如果 Trinity 需要知识后台，这是最成熟的候选方案</td></tr>
+</table>
+
+<h2>个人判断</h2>
+
+<p>这是目前最完整的 Karpathy Wiki 模式实现。和 Synthadoc 可以配合使用——Synthadoc 做上游文档矛盾检测和来源校验，llm_wiki 做下游知识库管理展示。</p>
+
+<p>但如果只是简单需求（少量文档、不做知识图谱），Hermes 已有的 llm-wiki skill 配合我（Hermes Agent）处理就够用了，不需要装桌面应用。llm_wiki 的价值在<strong>长期大量文档的持续管理 + 知识图谱可视化 + Deep Research 自动化</strong>时才能充分体现。</p>
+
+<h2>竞品/替代</h2>
+
+<ul>
+<li><strong>Synthadoc</strong>（轻量 CLI，侧重矛盾检测，⭐266）</li>
+<li><strong>Karpathy 原始模式</strong>（通过 Hermes llm-wiki skill 已可用，无 GUI）</li>
+<li><strong>Obsidian + AI 插件</strong>（更强的笔记生态，但无自动化 ingest）</li>
+</ul>
+
+<h2>注意点</h2>
+
+<ul>
+<li>GPL v3 许可证——如果 Trinity 体系要整合它，需要注意传染性</li>
+<li>需要额外配置 LLM API Key（不走 Hermes provider 体系）</li>
+<li>v0.4.x 还在快速迭代，生产环境需要评估稳定性</li>
+</ul>
+
+<h2>TODO</h2>
+
+<ul>
+<li>[ ] 实际安装试用，评估 ingest 质量</li>
+<li>[ ] 评估 API 与 Trinity 后端对接的可行性</li>
+<li>[ ] 与 Synthadoc 做对比测试</li>
+</ul>
+
+<footer>
+  <p>Trinity 项目协作 · <a href="llm-wiki.md">查看 Markdown 源文件</a></p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mega-ASR — 抗噪语音识别 — Tech Watchlist</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; }
+  body {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+    background: #faf8f5;
+    color: #1a1a1a;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+  a { color: #2980b9; text-decoration: none; }
+  a:hover { color: #c0392b; text-decoration: underline; }
+  h1 { font-size: 2rem; font-weight: 400; margin-bottom: 0.3rem; color: #1a1a1a; letter-spacing: -0.01em; }
+  h2 { font-size: 1.3rem; font-weight: 500; margin: 2rem 0 0.8rem; color: #1a1a1a; padding-bottom: 0.3rem; border-bottom: 1px solid #e8e2d8; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin: 1.5rem 0 0.6rem; color: #333; }
+  p { margin-bottom: 0.8rem; color: #333; font-size: 0.95rem; }
+  table { width: 100%; border-collapse: collapse; margin: 0.8rem 0 1.2rem; font-size: 0.88rem; }
+  th, td { border: 1px solid #e0dbd2; padding: 0.4rem 0.7rem; text-align: left; vertical-align: top; }
+  th { background: #f0ebe3; font-weight: 600; color: #333; font-size: 0.85rem; }
+  td { background: #fff; }
+  tr:nth-child(even) td { background: #faf8f5; }
+  blockquote {
+    border-left: 3px solid #d5cfc5;
+    margin: 0.8rem 0;
+    padding: 0.5rem 1rem;
+    color: #555;
+    font-style: italic;
+    background: #f8f5f0;
+  }
+  ul, ol { margin: 0.5rem 0 0.8rem 1.5rem; color: #333; font-size: 0.95rem; }
+  li { margin-bottom: 0.3rem; }
+  code {
+    font-family: "SF Mono", "Fira Code", "Menlo", monospace;
+    font-size: 0.85rem;
+    background: #f0ebe3;
+    padding: 0.1rem 0.3rem;
+    border-radius: 2px;
+  }
+  pre {
+    background: #f0ebe3;
+    padding: 1rem;
+    margin: 0.8rem 0;
+    overflow-x: auto;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    border: 1px solid #e0dbd2;
+  }
+  pre code { background: none; padding: 0; }
+  hr { border: none; border-top: 1px solid #e0dbd2; margin: 2rem 0; }
+  .back { margin-bottom: 1.5rem; font-size: 0.85rem; }
+  .back a { color: #888; }
+  .back a:hover { color: #c0392b; }
+  footer {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.82rem;
+    color: #888;
+    font-style: italic;
+    border-top: 1px solid #e8e2d8;
+    padding-top: 1.5rem;
+  }
+  strong { color: #1a1a1a; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<p class="back"><a href="../index.html">← 返回 Tech Watchlist</a></p>
+
+<h1>Mega-ASR</h1>
+
+<blockquote>抗噪语音识别模型，专为嘈杂环境设计。</blockquote>
+
+<h2>基本信息</h2>
+
+<table>
+<tr><th><strong>仓库</strong></th><th><a href="https://github.com/xzf-thu/Mega-ASR" target="_blank">xzf-thu/Mega-ASR</a></th></tr>
+<tr><td><strong>参数</strong></td><td>1.7B</td></tr>
+<tr><td><strong>Stars</strong></td><td>⭐ 350</td></tr>
+<tr><td><strong>亮点</strong></td><td>7 类 54 种声学污染，抗噪能力突出</td></tr>
+<tr><td><strong>定位</strong></td><td>酒店语音 Agent 边缘部署的候选方案</td></tr>
+</table>
+
+<h2>项目定位</h2>
+
+<p>Mega-ASR 是一个专注于抗噪能力的语音识别模型。在酒店场景中，大堂、餐厅、走廊等环境存在大量背景噪音（人声、音乐、空调、街声），通用 ASR 模型在此类环境下的准确率会大幅下降。Mega-ASR 针对这一场景进行了专门优化。</p>
+
+<p>与 Whisper 等通用方案的区别在于：Whisper 在各种场景下表现均衡，但 Mega-ASR 在特定嘈杂环境下的准确率可能显著领先。</p>
+
+<h2>技术分析</h2>
+
+<ul>
+<li><strong>架构</strong>：1.7B 参数模型，属于中等规模的 ASR 模型</li>
+<li><strong>抗噪能力</strong>：覆盖 7 类 54 种声学污染</li>
+<li><strong>部署</strong>：可边缘部署（1.7B 参数在边缘设备上可行但有挑战）</li>
+<li><strong>成熟度</strong>：350 Stars，相对早期</li>
+</ul>
+
+<h2>与我相关</h2>
+
+<table>
+<tr><th>维度</th><th>评估</th></tr>
+<tr><td>酒店业务契合度</td><td>⭐⭐⭐⭐⭐ — 酒店是大堂/餐厅等嘈杂环境的典型场景</td></tr>
+<tr><td>边缘部署</td><td>⭐⭐⭐⭐ — 1.7B 可在边缘设备运行，适配酒店离线/本地场景</td></tr>
+<tr><td>Trinity 整合</td><td>⭐⭐⭐⭐ — 作为酒店语音助手的 ASR 层非常合适</td></tr>
+</table>
+
+<h2>个人判断</h2>
+
+<p>与 MiniCPM-V-4.6（之前做的酒店视觉任务分析）配合使用可以覆盖酒店的视觉+听觉两个维度。Mega-ASR 做听觉入口（语音指令识别），MiniCPM 做视觉入口（场景理解）。但 350 Stars 的社区规模意味着需要自己承担更多集成工作。</p>
+
+<h2>TODO</h2>
+
+<ul>
+<li>[ ] 对比测试 Mega-ASR vs Whisper 在酒店实际场景下的准确率</li>
+<li>[ ] 评估在边缘设备（如 Jetson / RK3588）上的推理性能</li>
+</ul>
+
+<footer>
+  <p>Trinity 项目协作 · <a href="mega-asr.md">查看 Markdown 源文件</a></p>
+</footer>
+
+</div>
+</body>
+</html>

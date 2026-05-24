@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GEOFlow — 酒店 GEO 内容分发 — Tech Watchlist</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; }
+  body {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+    background: #faf8f5;
+    color: #1a1a1a;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+  a { color: #2980b9; text-decoration: none; }
+  a:hover { color: #c0392b; text-decoration: underline; }
+  h1 { font-size: 2rem; font-weight: 400; margin-bottom: 0.3rem; color: #1a1a1a; letter-spacing: -0.01em; }
+  h2 { font-size: 1.3rem; font-weight: 500; margin: 2rem 0 0.8rem; color: #1a1a1a; padding-bottom: 0.3rem; border-bottom: 1px solid #e8e2d8; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin: 1.5rem 0 0.6rem; color: #333; }
+  p { margin-bottom: 0.8rem; color: #333; font-size: 0.95rem; }
+  table { width: 100%; border-collapse: collapse; margin: 0.8rem 0 1.2rem; font-size: 0.88rem; }
+  th, td { border: 1px solid #e0dbd2; padding: 0.4rem 0.7rem; text-align: left; vertical-align: top; }
+  th { background: #f0ebe3; font-weight: 600; color: #333; font-size: 0.85rem; }
+  td { background: #fff; }
+  tr:nth-child(even) td { background: #faf8f5; }
+  blockquote {
+    border-left: 3px solid #d5cfc5;
+    margin: 0.8rem 0;
+    padding: 0.5rem 1rem;
+    color: #555;
+    font-style: italic;
+    background: #f8f5f0;
+  }
+  ul, ol { margin: 0.5rem 0 0.8rem 1.5rem; color: #333; font-size: 0.95rem; }
+  li { margin-bottom: 0.3rem; }
+  code {
+    font-family: "SF Mono", "Fira Code", "Menlo", monospace;
+    font-size: 0.85rem;
+    background: #f0ebe3;
+    padding: 0.1rem 0.3rem;
+    border-radius: 2px;
+  }
+  pre {
+    background: #f0ebe3;
+    padding: 1rem;
+    margin: 0.8rem 0;
+    overflow-x: auto;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    border: 1px solid #e0dbd2;
+  }
+  pre code { background: none; padding: 0; }
+  hr { border: none; border-top: 1px solid #e0dbd2; margin: 2rem 0; }
+  .back { margin-bottom: 1.5rem; font-size: 0.85rem; }
+  .back a { color: #888; }
+  .back a:hover { color: #c0392b; }
+  footer {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.82rem;
+    color: #888;
+    font-style: italic;
+    border-top: 1px solid #e8e2d8;
+    padding-top: 1.5rem;
+  }
+  strong { color: #1a1a1a; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<p class="back"><a href="../index.html">← 返回 Tech Watchlist</a></p>
+
+<h1>GEOFlow</h1>
+
+<blockquote>酒店 GEO 内容多平台分发系统。</blockquote>
+
+<h2>基本信息</h2>
+
+<table>
+<tr><th><strong>仓库</strong></th><th><a href="https://github.com/yaojingang/GEOFlow" target="_blank">yaojingang/GEOFlow</a></th></tr>
+<tr><td><strong>语言</strong></td><td>PHP / Laravel</td></tr>
+<tr><td><strong>Stars</strong></td><td>⭐ 1,721</td></tr>
+<tr><td><strong>定位</strong></td><td>酒店 GEO 内容管理 + 多站分发</td></tr>
+</table>
+
+<h2>项目定位</h2>
+
+<p>一个面向酒店行业的 GEO（地理）内容管理系统，支持将酒店内容分发到多个平台。典型场景：酒店描述、周边设施、地理位置信息等内容的统一管理，然后推送到不同 OTA 渠道或自有展示页面。</p>
+
+<h2>技术分析</h2>
+
+<ul>
+<li><strong>架构</strong>：PHP + Laravel 框架，经典 MVC 模式</li>
+<li><strong>数据库</strong>：未深入研究，但 Laravel 项目通常使用 MySQL/PostgreSQL</li>
+<li><strong>部署</strong>：标准 PHP 应用，可部署在常规 Web 服务器上</li>
+<li><strong>成熟度</strong>：1.7K Stars，有一定社区基础</li>
+</ul>
+
+<h2>与我相关</h2>
+
+<table>
+<tr><th>维度</th><th>评估</th></tr>
+<tr><td>酒店业务契合度</td><td>⭐⭐⭐⭐ — GEO 内容分发是酒店运营的核心需求</td></tr>
+<tr><td>Trinity 整合</td><td>⭐⭐⭐ — 可作为 Trinity 内容管理模块的参考实现</td></tr>
+<tr><td>技术栈兼容</td><td>⭐⭐ — PHP 与 Trinity 的技术栈（豆包/PMS）不同</td></tr>
+</table>
+
+<h2>个人判断</h2>
+
+<p>作为现有成熟方案可以研究其 GEO 内容管理的方法论，但不一定需要直接采用 PHP 版本。如果把 GEOFlow 的设计思想用 Trinity 的技术栈重新实现，可能更有价值。</p>
+
+<h2>TODO</h2>
+
+<ul>
+<li>[ ] 深入了解其数据库设计和分发机制</li>
+<li>[ ] 评估能否作为 Trinity PMS 的内容管理模块参考</li>
+</ul>
+
+<footer>
+  <p>Trinity 项目协作 · <a href="geoflow.md">查看 Markdown 源文件</a></p>
+</footer>
+
+</div>
+</body>
+</html>

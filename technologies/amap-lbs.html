@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>amap-lbs — 高德 LBS 服务 — Tech Watchlist</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; }
+  body {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+    background: #faf8f5;
+    color: #1a1a1a;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+  a { color: #2980b9; text-decoration: none; }
+  a:hover { color: #c0392b; text-decoration: underline; }
+  h1 { font-size: 2rem; font-weight: 400; margin-bottom: 0.3rem; color: #1a1a1a; letter-spacing: -0.01em; }
+  h2 { font-size: 1.3rem; font-weight: 500; margin: 2rem 0 0.8rem; color: #1a1a1a; padding-bottom: 0.3rem; border-bottom: 1px solid #e8e2d8; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin: 1.5rem 0 0.6rem; color: #333; }
+  p { margin-bottom: 0.8rem; color: #333; font-size: 0.95rem; }
+  table { width: 100%; border-collapse: collapse; margin: 0.8rem 0 1.2rem; font-size: 0.88rem; }
+  th, td { border: 1px solid #e0dbd2; padding: 0.4rem 0.7rem; text-align: left; vertical-align: top; }
+  th { background: #f0ebe3; font-weight: 600; color: #333; font-size: 0.85rem; }
+  td { background: #fff; }
+  tr:nth-child(even) td { background: #faf8f5; }
+  blockquote {
+    border-left: 3px solid #d5cfc5;
+    margin: 0.8rem 0;
+    padding: 0.5rem 1rem;
+    color: #555;
+    font-style: italic;
+    background: #f8f5f0;
+  }
+  ul, ol { margin: 0.5rem 0 0.8rem 1.5rem; color: #333; font-size: 0.95rem; }
+  li { margin-bottom: 0.3rem; }
+  code {
+    font-family: "SF Mono", "Fira Code", "Menlo", monospace;
+    font-size: 0.85rem;
+    background: #f0ebe3;
+    padding: 0.1rem 0.3rem;
+    border-radius: 2px;
+  }
+  pre {
+    background: #f0ebe3;
+    padding: 1rem;
+    margin: 0.8rem 0;
+    overflow-x: auto;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    border: 1px solid #e0dbd2;
+  }
+  pre code { background: none; padding: 0; }
+  hr { border: none; border-top: 1px solid #e0dbd2; margin: 2rem 0; }
+  .back { margin-bottom: 1.5rem; font-size: 0.85rem; }
+  .back a { color: #888; }
+  .back a:hover { color: #c0392b; }
+  footer {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.82rem;
+    color: #888;
+    font-style: italic;
+    border-top: 1px solid #e8e2d8;
+    padding-top: 1.5rem;
+  }
+  strong { color: #1a1a1a; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<p class="back"><a href="../index.html">← 返回 Tech Watchlist</a></p>
+
+<h1>amap-lbs</h1>
+
+<blockquote>高德地图 LBS 综合服务，Hermes Agent 技能。</blockquote>
+
+<h2>基本信息</h2>
+
+<table>
+<tr><th><strong>技能名称</strong></th><th>amap-lbs-skill</th></tr>
+<tr><td><strong>状态</strong></td><td>✅ 已安装</td></tr>
+<tr><td><strong>配置需求</strong></td><td>AMAP_WEBSERVICE_KEY（高德 Web 服务 API Key）</td></tr>
+<tr><td><strong>能力</strong></td><td>POI 搜索、路径规划、周边搜索、热力图数据可视化</td></tr>
+<tr><td><strong>适用场景</strong></td><td>酒店周边 POI、商圈分析、选址评估</td></tr>
+</table>
+
+<h2>项目定位</h2>
+
+<p>这是我已经安装到 Hermes Agent 的一个技能，不是独立的开源项目。通过调用高德地图 Web 服务 API，实现对地理位置的搜索、分析和可视化。</p>
+
+<p>核心能力：</p>
+<ul>
+<li><strong>POI 搜索</strong> — 搜索酒店周边的餐厅、地铁、景点、商场等设施</li>
+<li><strong>路径规划</strong> — 计算两点间的交通距离和时间</li>
+<li><strong>热力图</strong> — 可视化某个区域的热度分布，用于选址分析</li>
+<li><strong>旅游规划</strong> — 结合多个 POI 做行程推荐</li>
+</ul>
+
+<h2>与我相关</h2>
+
+<table>
+<tr><th>维度</th><th>评估</th></tr>
+<tr><td>酒店业务契合度</td><td>⭐⭐⭐⭐⭐ — POI 分析是酒店运营的基础需求</td></tr>
+<tr><td>已安装</td><td>✅ 随时可用，只需配置 API Key</td></tr>
+<tr><td>标准化数据源</td><td>⭐⭐⭐⭐⭐ — 高德地图覆盖中国所有城市的标准化 POI 数据</td></tr>
+</table>
+
+<h2>个人判断</h2>
+
+<p>这是目前最"现成"的工具，一次性配置好 API Key 后，所有能力都可以直接调用。在 Trinity 的酒店推荐、商圈分析、选址评估等功能中，应该作为标准数据源优先使用。</p>
+
+<h2>TODO</h2>
+
+<ul>
+<li>[ ] 配置 AMAP_WEBSERVICE_KEY 并激活技能</li>
+<li>[ ] 与 GEOFlow 的设计思想做对比——高德 POI 数据 + GEO 内容分发 = 完整的酒店地理信息服务</li>
+</ul>
+
+<footer>
+  <p>Trinity 项目协作 · <a href="amap-lbs.md">查看 Markdown 源文件</a></p>
+</footer>
+
+</div>
+</body>
+</html>
