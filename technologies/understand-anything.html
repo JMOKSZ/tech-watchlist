@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understand Anything — 代码知识图谱 — Tech Watchlist</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; }
+  body {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+    background: #faf8f5;
+    color: #1a1a1a;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+  a { color: #2980b9; text-decoration: none; }
+  a:hover { color: #c0392b; text-decoration: underline; }
+  h1 { font-size: 2rem; font-weight: 400; margin-bottom: 0.3rem; color: #1a1a1a; letter-spacing: -0.01em; }
+  h2 { font-size: 1.3rem; font-weight: 500; margin: 2rem 0 0.8rem; color: #1a1a1a; padding-bottom: 0.3rem; border-bottom: 1px solid #e8e2d8; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin: 1.5rem 0 0.6rem; color: #333; }
+  p { margin-bottom: 0.8rem; color: #333; font-size: 0.95rem; }
+  table { width: 100%; border-collapse: collapse; margin: 0.8rem 0 1.2rem; font-size: 0.88rem; }
+  th, td { border: 1px solid #e0dbd2; padding: 0.4rem 0.7rem; text-align: left; vertical-align: top; }
+  th { background: #f0ebe3; font-weight: 600; color: #333; font-size: 0.85rem; }
+  td { background: #fff; }
+  tr:nth-child(even) td { background: #faf8f5; }
+  blockquote {
+    border-left: 3px solid #d5cfc5;
+    margin: 0.8rem 0;
+    padding: 0.5rem 1rem;
+    color: #555;
+    font-style: italic;
+    background: #f8f5f0;
+  }
+  ul, ol { margin: 0.5rem 0 0.8rem 1.5rem; color: #333; font-size: 0.95rem; }
+  li { margin-bottom: 0.3rem; }
+  code {
+    font-family: "SF Mono", "Fira Code", "Menlo", monospace;
+    font-size: 0.82rem;
+    background: #f0ebe3;
+    padding: 0.1rem 0.3rem;
+    border-radius: 2px;
+  }
+  pre code { display: block; padding: 0.8rem; overflow-x: auto; background: #f0ebe3; font-size: 0.82rem; line-height: 1.4; }
+  .back { margin-bottom: 1rem; font-size: 0.85rem; }
+  .tag {
+    display: inline-block; font-size: 0.75rem; padding: 0.1rem 0.5rem;
+    margin-right: 0.3rem; border-radius: 2px; color: #fff;
+  }
+  .tag-dev { background: #e67e22; }
+  .tag-ai { background: #8e44ad; }
+  .tag-tool { background: #27ae60; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<p class="back"><a href="../index.html">← 返回 Tech Watchlist</a></p>
+
+<h1>Understand Anything</h1>
+<blockquote><p>把你的代码库、知识库或文档变成可交互的知识图谱。Tree-sitter + LLM 混合架构，多 Agent 管线。</p></blockquote>
+<h2>基本信息</h2>
+<table>
+<tr><th></th><th></th></tr>
+<tr><td>**仓库**</td><td>[Lum1104/Understand-Anything](https://github.com/Lum1104/Understand-Anything)</td></tr>
+<tr><td>**语言**</td><td>TypeScript（Monorepo，pnpm workspaces）</td></tr>
+<tr><td>**Stars**</td><td>⭐ 25,500</td></tr>
+<tr><td>**Forks**</td><td>2,200</td></tr>
+<tr><td>**Commits**</td><td>539</td></tr>
+<tr><td>**创建时间**</td><td>2026年3月15日（2个月）</td></tr>
+<tr><td>**许可证**</td><td>MIT</td></tr>
+<tr><td>**平台支持**</td><td>Claude Code（原生）、Cursor、VS Code Copilot、Codex、Gemini CLI、**Hermes**、Cline、OpenCode、KIMI CLI 等 15 个平台</td></tr>
+</table>
+<h2>项目定位</h2>
+<p>Understand Anything 是一个 AI 编码助手插件（以 Claude Code Plugin 为原生形态），核心能力是<strong>把代码库变成交互式知识图谱</strong>。不是简单画图，而是让开发者能搜索、提问、理解代码架构的工具。</p>
+<p>核心理念：<em>Graphs that teach > graphs that impress.</em></p>
+<p>解决了「加入新团队，面对 20 万行代码，从哪下手」这个经典问题。</p>
+<h2>技术分析</h2>
+<h3>架构：Tree-sitter + LLM 混合</h3>
+<pre><code>
+<p>代码库 → [Tree-sitter 确定性解析] → [LLM 语义摘要] → [知识图谱 JSON] → [交互式 Dashboard]</p>
+<p>                 ↓                          ↓</p>
+<p>         function/class/import       人类可读摘要、标签、</p>
+<p>         call chain（确定性）        架构分层（语义）</p>
+<pre><code>
+<p><strong>Tree-sitter（确定性）</strong> 负责：</p>
+<li>解析 source → AST</li>
+<li>提取 imports/exports、function/class 定义、调用点、继承关系</li>
+<li>指纹变更检测（增量更新基础）</li>
+<li>同样输入 → 同样输出，可重复</li>
+<p><strong>LLM（语义）</strong> 负责：</p>
+<li>为每个节点写平实的英文摘要（what it does, not how）</li>
+<li>分配标签、架构分层</li>
+<li>生成引导 Tour</li>
+<li>语言概念标注（12 种编程模式）</li>
+<h3>多 Agent 管线</h3>
+<p><code>/understand</code> 命令编排 5 个专门 Agent：</p>
+<table>
+<tr><th>Agent</th><th>职责</th></tr>
+<tr><td>`project-scanner`</td><td>发现文件、检测语言和框架</td></tr>
+<tr><td>`file-analyzer`</td><td>提取 function/class/import，产出节点和边（最多 5 并发）</td></tr>
+<tr><td>`architecture-analyzer`</td><td>识别架构分层（API/Service/Data/UI/Utility）</td></tr>
+<tr><td>`tour-builder`</td><td>按依赖顺序生成学习引导</td></tr>
+<tr><td>`graph-reviewer`</td><td>验证图谱完整性和引用一致性</td></tr>
+</table>
+<p>另有 <code>domain-analyzer</code>（业务领域图）和 <code>article-analyzer</code>（Wiki 知识库）。</p>
+<h3>Dashboard 可视化</h3>
+<p>React + Force Graph 交互式 Dashboard，支持：</p>
+<li>**力导向图** — 按架构层着色，可搜索可点击</li>
+<li>**领域视图** — 代码映射到业务 domain/flow/step 的水平图</li>
+<li>**Guided Tours** — 自动生成的架构学习路径</li>
+<li>**Diff Impact Analysis** — commit 前看波及范围</li>
+<li>**Persona-Adaptive UI** — 按角色（初级/PM/高级）调整信息密度</li>
+<li>**Fuzzy & Semantic Search** — 按名称或含义搜索</li>
+<li>**Layer Visualization** — 自动按 API/Service/Data 分组</li>
+<h3>30+ 语言支持</h3>
+<table>
+<tr><th>类别</th><th>语言</th></tr>
+<tr><td>主流语言</td><td>TypeScript、JavaScript、Python、Go、Rust、Java、Kotlin、C#、Ruby、PHP</td></tr>
+<tr><td>系统语言</td><td>C、C++、Swift</td></tr>
+<tr><td>Web</td><td>HTML、CSS、GraphQL</td></tr>
+<tr><td>数据</td><td>SQL、Protobuf、Prisma</td></tr>
+<tr><td>配置</td><td>YAML、JSON/JSONC、TOML、ENV</td></tr>
+<tr><td>基础设施</td><td>Dockerfile、Kubernetes、Terraform</td></tr>
+<tr><td>文档</td><td>Markdown、RST、Plaintext</td></tr>
+<tr><td>CI/CD</td><td>GitHub Actions、Jenkinsfile、Makefile</td></tr>
+</table>
+<h3>增量更新</h3>
+<p>第二次 <code>/understand</code> 只重新分析变更过的文件。基于指纹（fingerprint）检测变更类型：CONTENT（内容）、STRUCTURAL（结构）、DEPENDENCY（依赖）。STRUCTURAL 级别触发全量重分析。</p>
+<h3>知识图谱 Schema</h3>
+<p>13 种节点类型（file/function/class/module/concept/config/document/service/endpoint/pipeline/table/schema/resource）和 26 种边类型（imports/calls/contains/inherits/tested_by 等）。</p>
+<h3>跨平台兼容</h3>
+<table>
+<tr><th>平台</th><th>安装方式</th></tr>
+<tr><td>Claude Code</td><td>原生 Plugin Marketplace</td></tr>
+<tr><td>Cursor / VS Code Copilot</td><td>自动发现（clone 即用）</td></tr>
+<tr><td>Codex / Gemini CLI / OpenCode</td><td>`install.sh <platform>`</td></tr>
+<tr><td>**Hermes**</td><td>`install.sh hermes` → symlink 进 `~/.hermes/skills/`</td></tr>
+<tr><td>Cline / KIMI CLI</td><td>`install.sh <platform>`</td></tr>
+</table>
+<h2>与我相关</h2>
+<table>
+<tr><th>维度</th><th>评估</th></tr>
+<tr><td>Hermes 集成</td><td>⭐⭐⭐⭐⭐ — 已安装到本地 Hermes，`/understand` 可直接用</td></tr>
+<tr><td>代码库理解</td><td>⭐⭐⭐⭐⭐ — 对 Trinity / Hermes Agent 等大型代码库，跑一次就出架构图</td></tr>
+<tr><td>知识库分析</td><td>⭐⭐⭐⭐ — `/understand-knowledge` 支持 Karpathy 模式 Wiki（我 tech-watchlist 的格式）</td></tr>
+<tr><td>团队 Onboarding</td><td>⭐⭐⭐⭐ — `/understand-onboard` 自动生成按依赖排序的学习路径</td></tr>
+<tr><td>与 Hermes 互补</td><td>⭐⭐⭐⭐⭐ — Hermes 缺的就是「代码理解层」，这正是它的专长</td></tr>
+<tr><td>Dashboard</td><td>⭐⭐⭐ — 需要本地浏览器，Telegram 场景用不了，但 `/understand-chat` 可替代</td></tr>
+</table>
+<h2>与已有关注项目的对比</h2>
+<table>
+<tr><th></th><th>LightRAG</th><th>**Understand Anything**</th><th>llm_wiki</th></tr>
+<tr><td>本质</td><td>图检索 RAG</td><td>**代码库/知识库 → 交互式图谱**</td><td>桌面知识库应用</td></tr>
+<tr><td>输入</td><td>文档（任意文本）</td><td>**代码 + Markdown Wiki**</td><td>手动编辑</td></tr>
+<tr><td>输出</td><td>LLM 问答 API</td><td>**交互式可视化图谱 + Chat**</td><td>人类可读的知识库</td></tr>
+<tr><td>消费方式</td><td>API 调用</td><td>**Dashboard + `/understand-chat`**</td><td>桌面 GUI</td></tr>
+<tr><td>适用场景</td><td>酒店数据问答</td><td>**代码理解**</td><td>知识管理</td></tr>
+<tr><td>Stars</td><td>⭐35.6K</td><td>**⭐25.5K**</td><td>⭐9K</td></tr>
+</table>
+<p>LightRAG 和 Understand Anything 其实互补：LightRAG 做「文本知识 → 图检索」，Understand Anything 做「代码结构 → 图可视化」。两者思路相似（图谱），但目标不同。</p>
+<h2>个人判断</h2>
+<p>这是目前为止最适合 Hermes 生态的外部工具。25.5K ⭐，2 个月达到，社区热度极高。核心设计（Tree-sitter + LLM 混合）和 Hermes 的「工具调用 + Agent 管线」哲学一致。</p>
+<p>最大的实用价值：</p>
+<p>1. <strong>对 Hermes Agent 自身</strong> — 跑一次 <code>/understand</code> 就出了 100 节点/105 边的工具层图谱，后续可以增量更新</p>
+<p>2. <strong>对 Trinity</strong> — 如果 Trinity 代码在锦江机器上，跑一次能出架构全貌</p>
+<p>3. <strong>知识库分析</strong> — <code>/understand-knowledge</code> 直接支持我 tech-watchlist 的 Wiki 格式</p>
+<p>当前痛点：在 Telegram 上 Dashboard 用不了，但 <code>/understand-chat</code> 做文本问答够用了。</p>
+<h2>TODO</h2>
+<li>[x] 安装到本地 Hermes（`install.sh hermes`）</li>
+<li>[x] 修复 symlink skill 加载 bug</li>
+<li>[x] 对 Hermes Agent tools/ 跑完整分析 → 100 节点图谱</li>
+<li>[x] 配置 Dashboard（http://127.0.0.1:5173）</li>
+<li>[ ] 对 Hermes Agent 全量代码跑一次（3500 文件，看能不能撑住）</li>
+<li>[ ] 试 `/understand-knowledge` 分析 tech-watchlist wiki</li>
+<li>[ ] 评估能否在 Trinity CI 中集成 `/understand` 自动生成架构图</li>
+
+<p style="margin-top:2rem; font-size:0.85rem; color:#888; border-top:1px solid #e8e2d8; padding-top:1rem;">
+  Trinity 项目协作 · 分析日期 2026-05-25
+</p>
+
+</div>
+</body>
+</html>

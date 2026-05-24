@@ -21,6 +21,9 @@
 ### 隐身与自动化
 7. [CloakBrowser](./technologies/cloakbrowser.md) — C++ 源码级隐身 Chromium
 
+### 开发者工具
+8. [Understand Anything](./technologies/understand-anything.md) — 代码库/知识库 → 交互式知识图谱（Tree-sitter + LLM）
+
 ## 关于这份清单
 
 这些技术来自日常关注与深度研究。每个条目包含：
