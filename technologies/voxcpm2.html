@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VoxCPM2 — Tokenizer-free TTS — Tech Watchlist</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; }
+  body {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+    background: #faf8f5;
+    color: #1a1a1a;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+  a { color: #2980b9; text-decoration: none; }
+  a:hover { color: #c0392b; text-decoration: underline; }
+  h1 { font-size: 2rem; font-weight: 400; margin-bottom: 0.3rem; color: #1a1a1a; letter-spacing: -0.01em; }
+  h2 { font-size: 1.3rem; font-weight: 500; margin: 2rem 0 0.8rem; color: #1a1a1a; padding-bottom: 0.3rem; border-bottom: 1px solid #e8e2d8; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin: 1.5rem 0 0.6rem; color: #333; }
+  p { margin-bottom: 0.8rem; color: #333; font-size: 0.95rem; }
+  table { width: 100%; border-collapse: collapse; margin: 0.8rem 0 1.2rem; font-size: 0.88rem; }
+  th, td { border: 1px solid #e0dbd2; padding: 0.4rem 0.7rem; text-align: left; vertical-align: top; }
+  th { background: #f0ebe3; font-weight: 600; color: #333; font-size: 0.85rem; }
+  td { background: #fff; }
+  tr:nth-child(even) td { background: #faf8f5; }
+  blockquote {
+    border-left: 3px solid #d5cfc5;
+    margin: 0.8rem 0;
+    padding: 0.5rem 1rem;
+    color: #555;
+    font-style: italic;
+    background: #f8f5f0;
+  }
+  ul, ol { margin: 0.5rem 0 0.8rem 1.5rem; color: #333; font-size: 0.95rem; }
+  li { margin-bottom: 0.3rem; }
+  code {
+    font-family: "SF Mono", "Fira Code", "Menlo", monospace;
+    font-size: 0.85rem;
+    background: #f0ebe3;
+    padding: 0.1rem 0.3rem;
+    border-radius: 2px;
+  }
+  pre {
+    background: #f0ebe3;
+    padding: 1rem;
+    margin: 0.8rem 0;
+    overflow-x: auto;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    border: 1px solid #e0dbd2;
+  }
+  pre code { background: none; padding: 0; }
+  hr { border: none; border-top: 1px solid #e0dbd2; margin: 2rem 0; }
+  .back { margin-bottom: 1.5rem; font-size: 0.85rem; }
+  .back a { color: #888; }
+  .back a:hover { color: #c0392b; }
+  footer {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.82rem;
+    color: #888;
+    font-style: italic;
+    border-top: 1px solid #e8e2d8;
+    padding-top: 1.5rem;
+  }
+  strong { color: #1a1a1a; }
+  .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 0.1rem 0.5rem;
+    margin-right: 0.3rem;
+    border-radius: 2px;
+    color: #fff;
+  }
+  .tag-ai { background: #8e44ad; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<p class="back"><a href="../index.html">← 返回 Tech Watchlist</a></p>
+
+<h1>VoxCPM2</h1>
+
+<blockquote>Token-free TTS，30种语言，Voice Design，可控语音克隆 — OpenBMB / 清华团队</blockquote>
+
+<h2>基本信息</h2>
+
+<table>
+<tr><th colspan="2">基本信息</th></tr>
+<tr><td><strong>仓库</strong></td><td><a href="https://github.com/OpenBMB/VoxCPM" target="_blank">OpenBMB/VoxCPM</a></td></tr>
+<tr><td><strong>组织</strong></td><td>BAAI / OpenBMB（清华团队）</td></tr>
+<tr><td><strong>Stars</strong></td><td>⭐ 26,679</td></tr>
+<tr><td><strong>License</strong></td><td>Apache 2.0</td></tr>
+<tr><td><strong>首发</strong></td><td>2025年9月（VoxCPM2: 2026年4月）</td></tr>
+</table>
+
+<h2>项目定位</h2>
+
+<p>新一代 Tokenizer-free TTS 系统，绕过离散 token 化，直接通过端到端扩散自回归架构生成连续语音表示。VoxCPM2 是 2B 参数版本，200 万+小时多语种训练。</p>
+
+<h2>核心能力</h2>
+
+<table>
+<tr><th>能力</th><th>描述</th></tr>
+<tr><td><strong>多语言 TTS</strong></td><td>30种语言（含粤语、四川话等方言），无需语言标签</td></tr>
+<tr><td><strong>Voice Design</strong></td><td>自然语言描述即可生成全新声音：<code>"(A young woman, gentle voice)Hello"</code></td></tr>
+<tr><td><strong>可控克隆</strong></td><td>参考音频克隆音色 + 风格指令控制语速/情绪/语调</td></tr>
+<tr><td><strong>终极克隆</strong></td><td>参考音频 + 精确转录，保留所有语音细节</td></tr>
+<tr><td><strong>质量</strong></td><td>48kHz studio 级输出，无需外挂升采样器</td></tr>
+<tr><td><strong>实时流式</strong></td><td>RTF ~0.3 on RTX 4090，~0.13 with vLLM-Omni</td></tr>
+</table>
+
+<h2>技术分析</h2>
+
+<ul>
+<li><strong>架构</strong>：MiniCPM-4 骨干 + Diffusion Autoregressive + AudioVAE V2</li>
+<li><strong>关键设计</strong>：Token-free（连续表示），绕过离散 token 的语义损失</li>
+<li><strong>部署</strong>：<code>pip install voxcpm</code>，三行代码出音频</li>
+<li><strong>成熟度</strong>：26.7K Stars，持续活跃，有 HuggingFace 在线 Demo</li>
+<li><strong>社区</strong>：飞书 + Discord 群，ReadTheDocs 文档齐全</li>
+</ul>
+
+<h2>同类对比</h2>
+
+<table>
+<tr><th>方案</th><th>克隆</th><th>Voice Design</th><th>语言</th><th>许可</th><th>状态</th></tr>
+<tr><td><strong>VoxCPM2</strong></td><td>✅ 零样本</td><td>✅ 自然语言描述</td><td>30种</td><td>Apache 2.0</td><td>活跃</td></tr>
+<tr><td>CosyVoice v3</td><td>✅ 零样本</td><td>❌</td><td>9语+18方言</td><td>Apache 2.0</td><td>活跃</td></tr>
+<tr><td>GPT-SoVITS v2</td><td>✅ 1分钟微调</td><td>❌</td><td>5种</td><td>MIT</td><td>活跃</td></tr>
+<tr><td>Fish Speech S2</td><td>✅ 零样本</td><td>✅ 1.5万标签</td><td>80+种</td><td>限制商业</td><td>活跃</td></tr>
+</table>
+
+<p><strong>独到之处</strong>：唯一同时支持 Voice Design + 30语言 + Apache 2.0 完全开源的三合一方案。</p>
+
+<h2>限制</h2>
+
+<ul>
+<li><strong>硬件</strong>：需要 NVIDIA GPU（4090 推荐），不兼容 Apple Silicon / MPS</li>
+<li><strong>Python</strong>：要求 ≥3.10 但 <3.13（当前环境 3.13 不可用）</li>
+<li><strong>体积</strong>：2B 参数，16GB 显存起步</li>
+</ul>
+
+<h2>与我相关</h2>
+
+<table>
+<tr><th>维度</th><th>评估</th></tr>
+<tr><td>粤语支持</td><td>⭐⭐⭐⭐⭐ — 直接支持粤语，对湾区场景关键</td></tr>
+<tr><td>酒店业务</td><td>⭐⭐⭐ — 多语言语音提示、自动电话应答有潜力</td></tr>
+<tr><td>H.OS 整合</td><td>⭐⭐⭐ — 可作为语音交互层的 TTS 引擎候选</td></tr>
+<tr><td>本地部署</td><td>⭐⭐ — 需要独立 GPU 服务器，不能跑在 Mac mini 上</td></tr>
+</table>
+
+<h2>个人判断</h2>
+
+<p>当前最值得关注的 TTS 开源项目。Voice Design 是差异化亮点——其他方案（CosyVoice、GPT-SoVITS）在克隆质量上不输甚至更成熟，但凭空生成声音这个能力独此一家。Apache 2.0 许可对商业使用友好。</p>
+
+<p><strong>下一步</strong>：等 James 回 Mac mini 旁边，或在 VPS 上装一台带 GPU 的推理机，部署试用。</p>
+
+<h2>TODO</h2>
+
+<ul>
+<li>[ ] 在有 NVIDIA GPU 的环境上部署测试</li>
+<li>[ ] 测试粤语 TTS + Voice Design 实际效果</li>
+<li>[ ] 评估作为 H.OS 语音引擎的可行性</li>
+</ul>
+
+<footer>
+  <p>Trinity 项目协作 · <a href="voxcpm2.md">查看 Markdown 源文件</a> · <a href="../tts_comparison.md">TTS 横向对比表</a></p>
+</footer>
+
+</div>
+</body>
+</html>

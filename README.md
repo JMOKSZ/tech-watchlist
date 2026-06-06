@@ -24,6 +24,9 @@
 ### 开发者工具
 8. [Understand Anything](./technologies/understand-anything.md) — 代码库/知识库 → 交互式知识图谱（Tree-sitter + LLM）
 
+### AI 语音技术
+9. [VoxCPM2](./technologies/voxcpm2.md) — Tokenizer-free TTS，30语言，Voice Design，可控语音克隆（OpenBMB / 清华）
+
 ## 关于这份清单
 
 这些技术来自日常关注与深度研究。每个条目包含：
