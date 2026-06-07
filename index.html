@@ -84,6 +84,7 @@
   .tag-ai { background: #8e44ad; }
   .tag-tool { background: #27ae60; }
   .tag-stealth { background: #c0392b; }
+  .tag-tts { background: #2980b9; }
   footer {
     margin-top: 3rem;
     text-align: center;
@@ -100,7 +101,7 @@
   <h1>Tech Watchlist</h1>
   <p class="subtitle" style="font-weight:600; color:#c0392b;">Trinity 项目协作：技术路径探讨</p>
   <p class="subtitle">AI 时代值得关注的技术项目精选 — 分析摘要与个人判断</p>
-  <p class="meta">更新于 2026年6月 · 10 个项目 · 协作编辑中</p>
+  <p class="meta">更新于 2026年6月 · 11 个项目 · 协作编辑中</p>
 </header>
 
 <h2 class="section-header">🏨 酒店与商业技术</h2>
@@ -239,6 +240,20 @@
   <p class="desc">Tokenizer-free TTS 系统，直接端到端生成连续语音。30种语言（含粤语），Voice Design 可凭空造声音，可控克隆，48kHz 输出，实时流式。</p>
   <p class="verdict">当前最值得关注的 TTS 项目。Voice Design 独此一家，Apache 2.0 商用友好。等 GPU 环境部署测试。</p>
   <p class="links"><a href="https://github.com/OpenBMB/VoxCPM" target="_blank">🔗 GitHub</a><span class="sep">|</span><a href="./technologies/voxcpm2.html">📄 分析详情 →</a></p>
+</div>
+
+<div class="card">
+  <h2><a href="./technologies/vibevoice.html">⑪ Microsoft VibeVoice-Realtime</a></h2>
+  <div class="meta-line">
+    <span>MIT</span>
+    <span>0.5B 参数</span>
+    <span style="color:#c0392b;font-weight:600;">❌ 不支持中文</span>
+    <span class="tag tag-ai">AI</span>
+    <span class="tag tag-tts">TTS</span>
+  </div>
+  <p class="desc">微软开源的流式实时 TTS 模型。Continuous Speech Tokenizer（7.5Hz）+ Next-Token Diffusion 架构，首音延迟 200-300ms（CUDA），token 级流式输出，8K 上下文窗口。</p>
+  <p class="verdict">技术架构亮眼。实测 M4 上英文 RTF 1.90x（非实时），中文输出混乱——官方仅支持英文。等中文版或社区适配。</p>
+  <p class="links"><a href="https://github.com/microsoft/VibeVoice" target="_blank">🔗 GitHub</a><span class="sep">|</span><a href="https://huggingface.co/microsoft/VibeVoice-Realtime-0.5B" target="_blank">🤗 HuggingFace</a><span class="sep">|</span><a href="./technologies/vibevoice.html">📄 分析详情 →</a></p>
 </div>
 
 <footer>

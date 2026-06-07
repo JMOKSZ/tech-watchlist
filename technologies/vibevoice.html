@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Microsoft VibeVoice-Realtime-0.5B — Tech Watchlist</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; }
+  body {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+    background: #faf8f5;
+    color: #1a1a1a;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 800px; margin: 0 auto; padding: 3rem 1.5rem; }
+  a { color: #2980b9; text-decoration: none; }
+  a:hover { color: #c0392b; text-decoration: underline; }
+  h1 { font-size: 1.8rem; font-weight: 400; margin-bottom: 0.3rem; }
+  .subtitle { font-size: 1rem; color: #666; margin-bottom: 2rem; }
+  h2 { font-size: 1.2rem; font-weight: 600; margin: 2rem 0 0.8rem; color: #1a1a1a; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+  p { margin-bottom: 0.8rem; color: #333; }
+  ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+  li { margin-bottom: 0.3rem; color: #444; }
+  .meta-box {
+    background: #fff;
+    border: 1px solid #e8e2d8;
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+  .meta-box .row { display: flex; padding: 0.3rem 0; }
+  .meta-box .label { width: 110px; color: #888; flex-shrink: 0; }
+  .meta-box .value { color: #333; }
+  .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 0.1rem 0.5rem;
+    margin-right: 0.3rem;
+    border-radius: 2px;
+    color: #fff;
+  }
+  .tag-ai { background: #8e44ad; }
+  .tag-tts { background: #2980b9; }
+  .tag-macos { background: #c0392b; }
+  .verdict {
+    border-left: 4px solid #c0392b;
+    background: #fff;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: #555;
+  }
+  .table-wrap { overflow-x: auto; margin: 1rem 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  th, td { padding: 0.5rem 0.8rem; text-align: left; border-bottom: 1px solid #e8e2d8; }
+  th { background: #f5f2ed; font-weight: 600; color: #333; }
+  .back { margin-top: 2rem; font-size: 0.9rem; }
+  footer { margin-top: 3rem; text-align: center; font-size: 0.85rem; color: #888; font-style: italic; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Microsoft VibeVoice-Realtime-0.5B</h1>
+<p class="subtitle">微软开源的流式实时语音合成模型 · MIT · 0.5B 参数</p>
+
+<div class="meta-box">
+  <div class="row"><span class="label">仓库</span><span class="value"><a href="https://github.com/microsoft/VibeVoice" target="_blank">microsoft/VibeVoice</a></span></div>
+  <div class="row"><span class="label">HuggingFace</span><span class="value"><a href="https://huggingface.co/microsoft/VibeVoice-Realtime-0.5B" target="_blank">microsoft/VibeVoice-Realtime-0.5B</a></span></div>
+  <div class="row"><span class="label">许可</span><span class="value">MIT</span></div>
+  <div class="row"><span class="label">参数</span><span class="value">0.5B</span></div>
+  <div class="row"><span class="label">核心架构</span><span class="value">Continuous Speech Tokenizer (7.5Hz) + Next-Token Diffusion</span></div>
+  <div class="row"><span class="label">添加时间</span><span class="value">2026-06-08</span></div>
+  <div class="row"><span class="label">标签</span><span class="value"><span class="tag tag-ai">AI</span><span class="tag tag-tts">TTS</span></span></div>
+</div>
+
+<h2>项目定位</h2>
+<p>VibeVoice 是微软 2026 年开源的语音 AI 全家桶（MIT 协议），包括 ASR（7B）、TTS（1.5B）和 Realtime（0.5B）三个模型。Realtime-0.5B 是专门为<strong>流式低延迟语音交互</strong>设计的轻量 TTS 模型，首音延迟宣称 200-300ms（CUDA 环境），支持 token 级流式输出。</p>
+
+<h2>核心技术</h2>
+<ul>
+  <li><strong>7.5Hz 连续分词器</strong> — 每秒只生成 7.5 个 token（传统 TTS 通常 50+ Hz），序列长度极短，实现低延迟</li>
+  <li><strong>Next-Token Diffusion</strong> — 小 transformer 预测语义 token + diffusion head 生成音频细节，比纯自回归高效</li>
+  <li><strong>单说话人 TTS</strong> — 与多说话人变体不同，Realtime 专注单人流式输出</li>
+  <li><strong>8K 上下文窗口</strong> — 约 10 分钟连续音频生成，无需分段</li>
+  <li><strong>预置音色</strong> — 25 种预填充语音文件（含英文 6 种、日韩法德西葡荷波等多语言音色）</li>
+  <li><strong>流式 WebSocket 支持</strong> — 可对接 LLM 实现实时语音对话</li>
+</ul>
+
+<h2>实测数据（Mac M4 · 16GB · float32 · MPS）</h2>
+
+<div class="table-wrap">
+<table>
+  <tr><th>测试</th><th>文本</th><th>音色</th><th>音频时长</th><th>生成耗时</th><th>RTF</th></tr>
+  <tr><td>英文</td><td>~20 词</td><td>Carter（男声）</td><td>7.73s</td><td>14.66s</td><td>1.90x</td></tr>
+  <tr><td>中文</td><td>~30 字</td><td>Carter（男声）</td><td>9.60s</td><td>10.49s</td><td>1.09x</td></tr>
+</table>
+</div>
+
+<p><strong>英文</strong>：质量正常，但 RTF 1.90x 无法实时。<strong>中文</strong>：RTF 1.09x 接近实时，但输出内容混乱（音素错位），官方明确仅支持英文。</p>
+
+<h2>限制</h2>
+<ul>
+  <li><strong style="color:#c0392b;">不支持中文语音</strong> — 中文输入会输出混乱内容。官方声明 "English only"</li>
+  <li><strong>M4 无法达到实时</strong> — 需要 CUDA + flash attention + float16 才能达到 200-300ms 首音延迟</li>
+  <li><strong>单说话人</strong> — 无多说话人对话支持（需用 VibeVoice-TTS-1.5B）</li>
+  <li><strong>音色克隆受限</strong> — 微软因 deepfake 担忧限制了部分音色克隆模块</li>
+  <li><strong>代码/公式不支持</strong> — 不含背景音、非语音内容</li>
+</ul>
+
+<h2>与当前链路的对比</h2>
+
+<div class="table-wrap">
+<table>
+  <tr><th>维度</th><th>当前方案（ElevenLabs）</th><th>VibeVoice-Realtime</th></tr>
+  <tr><td>部署方式</td><td>API 调用（按字符付费）</td><td>本地 0.5B（免费）</td></tr>
+  <tr><td>延迟（M4）</td><td>~500ms+（含网络）</td><td>无法实时（RTF 1.09-1.90x）</td></tr>
+  <tr><td>延迟（CUDA）</td><td>—</td><td>~200-300ms（首音）</td></tr>
+  <tr><td>中文质量</td><td>好</td><td>❌ 不支持</td></tr>
+  <tr><td>音色克隆</td><td>付费功能</td><td>有但受限</td></tr>
+  <tr><td>流式能力</td><td>分段调用</td><td>token 级流式</td></tr>
+</table>
+</div>
+
+<div class="verdict">
+  <strong>个人判断：</strong>技术架构亮眼（7.5Hz 连续分词 + Next-Token Diffusion），但目前不适合 James 的场景。中文不支持是硬伤，M4 跑不到实时。等微软出中文微调版或社区适配后可重新评估。
+</div>
+
+<h2>后续关注点</h2>
+<ul>
+  <li>微软是否放出中文微调版</li>
+  <li>社区 fork（vibevoice-community）的音色克隆恢复进展</li>
+  <li>ggml/C++ 移植版能否在 M4 上跑出实时性能</li>
+  <li>中文适配的社区贡献</li>
+</ul>
+
+<p class="back"><a href="../index.html">← 返回 Tech Watchlist</a></p>
+
+<footer>
+  <p>Trinity 项目协作 · 团队成员共同维护</p>
+</footer>
+
+</div>
+</body>
+</html>
