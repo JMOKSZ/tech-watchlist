@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>turbovec — TurboQuant 向量索引 — Tech Watchlist</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; }
+  body {
+    font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+    background: #faf8f5;
+    color: #1a1a1a;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+  a { color: #2980b9; text-decoration: none; }
+  a:hover { color: #c0392b; text-decoration: underline; }
+  h1 { font-size: 2rem; font-weight: 400; margin-bottom: 0.3rem; color: #1a1a1a; letter-spacing: -0.01em; }
+  h2 { font-size: 1.3rem; font-weight: 500; margin: 2rem 0 0.8rem; color: #1a1a1a; padding-bottom: 0.3rem; border-bottom: 1px solid #e8e2d8; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin: 1.5rem 0 0.6rem; color: #333; }
+  p { margin-bottom: 0.8rem; color: #333; font-size: 0.95rem; }
+  table { width: 100%; border-collapse: collapse; margin: 0.8rem 0 1.2rem; font-size: 0.88rem; }
+  th, td { border: 1px solid #e0dbd2; padding: 0.4rem 0.7rem; text-align: left; vertical-align: top; }
+  th { background: #f0ebe3; font-weight: 600; color: #333; font-size: 0.85rem; }
+  td { background: #fff; }
+  tr:nth-child(even) td { background: #faf8f5; }
+  blockquote {
+    border-left: 3px solid #d5cfc5;
+    margin: 0.8rem 0;
+    padding: 0.5rem 1rem;
+    color: #555;
+    font-style: italic;
+    background: #f8f5f0;
+  }
+  ul, ol { margin: 0.5rem 0 0.8rem 1.5rem; color: #333; font-size: 0.95rem; }
+  li { margin-bottom: 0.3rem; }
+  code {
+    font-family: "SF Mono", "Fira Code", "Menlo", monospace;
+    font-size: 0.85rem;
+    background: #f0ebe3;
+    padding: 0.1rem 0.3rem;
+    border-radius: 2px;
+  }
+  pre {
+    background: #f0ebe3;
+    padding: 1rem;
+    margin: 0.8rem 0;
+    overflow-x: auto;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    border: 1px solid #e0dbd2;
+  }
+  pre code { background: none; padding: 0; }
+  hr { border: none; border-top: 1px solid #e0dbd2; margin: 2rem 0; }
+  .back { margin-bottom: 1.5rem; font-size: 0.85rem; }
+  .back a { color: #888; }
+  .back a:hover { color: #c0392b; }
+  footer {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.82rem;
+    color: #888;
+    font-style: italic;
+    border-top: 1px solid #e8e2d8;
+    padding-top: 1.5rem;
+  }
+  strong { color: #1a1a1a; }
+  .tag { display: inline-block; font-size: 0.75rem; padding: 0.1rem 0.45rem; margin-right: 0.3rem; border-radius: 2px; background: #e8e2d8; color: #555; }
+  .tag.rust { background: #f0e3d8; color: #8b4513; }
+  .tag.python { background: #d8e8f0; color: #2c5f7a; }
+  .tag.ml { background: #e8d8f0; color: #6a3d8a; }
+  .star-rating { color: #d4a017; font-size: 0.95rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<p class="back"><a href="../index.html">← 返回 Tech Watchlist</a></p>
+
+<h1>turbovec</h1>
+
+<blockquote>Google TurboQuant 算法的高性能向量索引 — Rust 内核 + Python 绑定，比 FAISS 快 12-20%，内存省 16 倍</blockquote>
+
+<h2>基本信息</h2>
+
+<table>
+<tr><th><strong>仓库</strong></th><th><a href="https://github.com/RyanCodrai/turbovec" target="_blank">RyanCodrai/turbovec</a></th></tr>
+<tr><td><strong>论文</strong></td><td><a href="https://arxiv.org/abs/2504.19874" target="_blank">TurboQuant: Online Vector Quantization with Near-optimal Distortion Rate</a> (ICLR 2026)</td></tr>
+<tr><td><strong>语言</strong></td><td><span class="tag rust">Rust</span> <span class="tag python">Python</span></td></tr>
+<tr><td><strong>Stars</strong></td><td>⭐ 8,181</td></tr>
+<tr><td><strong>Forks</strong></td><td>768</td></tr>
+<tr><td><strong>许可证</strong></td><td>MIT</td></tr>
+<tr><td><strong>创建</strong></td><td>2026-03-26（~2.5 个月）</td></tr>
+<tr><td><strong>安装</strong></td><td><code>pip install turbovec</code></td></tr>
+</table>
+
+<h2>项目定位</h2>
+
+<p>turbovec 是 Google Research TurboQuant 论文的完整 Rust 实现 + Python 绑定。它解决的是向量搜索中最核心的矛盾：<strong>精度 vs 内存 vs 速度</strong>。</p>
+
+<p>传统方案 FAISS PQ 需要训练阶段、需要调参、ARM 上性能一般。turbovec 的方案是<strong>数据无关量化</strong> — 利用高维空间的一个数学性质：任何归一化后的向量在随机旋转后，每个坐标都服从已知分布（Beta → Gaussian）。所以不需要从数据中学习码本，Lloyd-Max 码本可以直接从数学推导预计算。</p>
+
+<p>核心特性：</p>
+<ul>
+<li><strong>在线 ingest</strong>，无需 train 阶段，无参数调优</li>
+<li><strong>2-bit / 4-bit 量化</strong>，10M 文档 31GB → 4GB</li>
+<li><strong>SIMD 内核</strong>：NEON (ARM) / AVX-512BW (x86)，手写汇编级优化</li>
+<li><strong>内核级过滤</strong>：allowlist 直接在 SIMD 块内过滤，无需 over-fetch</li>
+<li><strong>纯本地</strong>：无外部服务，可配合开源 embedding 做完全隔离的 RAG</li>
+<li><strong>框架集成</strong>：LangChain / LlamaIndex / Haystack / Agno 四套 drop-in 替换</li>
+</ul>
+
+<h2>技术分析</h2>
+
+<h3>架构</h3>
+
+<pre><code>输入向量 (float32)
+    ↓
+归一化 → 存 norm (float)
+    ↓
+随机旋转 (固定正交矩阵)
+    ↓
+TQ+ 逐坐标校准 (shift + scale, 首次 add 时拟合)
+    ↓
+Lloyd-Max 标量量化 (2-bit: 4 桶, 4-bit: 16 桶)
+    ↓
+Bit-pack → 压缩存储
+    ↓
+搜索时: 旋转 query → SIMD LUT scoring → 长度重归一化 → top-k
+</code></pre>
+
+<h3>性能数据（100K 向量, k=64）</h3>
+
+<table>
+<tr><th>平台</th><th>对比 FAISS</th><th>2-bit</th><th>4-bit</th></tr>
+<tr><td>ARM (M3 Max)</td><td>单线程</td><td>+16%</td><td>+18%</td></tr>
+<tr><td>ARM (M3 Max)</td><td>多线程</td><td>+12%</td><td>+20%</td></tr>
+<tr><td>x86 (Sapphire Rapids)</td><td>单线程</td><td>~持平</td><td>+1-6%</td></tr>
+</table>
+
+<h3>质量</h3>
+
+<ul>
+<li><strong>Rust 测试 14 个文件 133+ 项</strong> + <strong>Python 测试 7 个文件 313+ 项</strong> = 446+ 测试</li>
+<li>测试代码 8,588 行，超过生产代码（Rust 4,136 行）</li>
+<li><strong>v0.7.0 审计驱动发布</strong>：修复 14 个无声数据损坏 bug（含 NaN/Inf 污染、空加冻结校准等竞品不易发现的问题）</li>
+<li>CI 覆盖 Linux/macOS/Windows 三平台</li>
+<li>单人开发 + Claude Opus 4.7 辅助，但代码质量经审计验证</li>
+</ul>
+
+<h3>限制</h3>
+
+<ul>
+<li><strong>一人项目</strong>：bus factor = 1</li>
+<li>无 GitHub Releases（只有 git tag）</li>
+<li>8181 stars / 40 subscribers — engagement 比例偏低（0.5%），但 star 时间分布渐进，非买榜</li>
+<li>需要外部 embedding 模型配合使用</li>
+</ul>
+
+<h2>与我相关</h2>
+
+<table>
+<tr><th>维度</th><th>评分</th><th>说明</th></tr>
+<tr><td>H.OS 向量存储</td><td><span class="star-rating">⭐⭐⭐⭐⭐</span></td><td>直接替换 FAISS，<code>pip install turbovec</code> 即可，内存省 16 倍</td></tr>
+<tr><td>OTA 智能简报</td><td><span class="star-rating">⭐⭐⭐⭐</span></td><td>酒店数据 embedding 后语义搜索，turbovec 做底层存储</td></tr>
+<tr><td>店总知识库</td><td><span class="star-rating">⭐⭐⭐⭐⭐</span></td><td>LangChain 集成一行改 import，纯本地 RAG</td></tr>
+<tr><td>视觉 Embedding</td><td><span class="star-rating">⭐⭐⭐⭐</span></td><td>CLIP/MiniCPM embedding → 2-bit 量化，1M 张图 ~400MB</td></tr>
+<tr><td>Mac Mini M3</td><td><span class="star-rating">⭐⭐⭐⭐⭐</span></td><td>NEON 内核原生优化，比 x86 FAISS 还快</td></tr>
+</table>
+
+<h2>对比现有方案 (FAISS)</h2>
+
+<table>
+<tr><th>维度</th><th>FAISS</th><th>turbovec</th></tr>
+<tr><td>训练</td><td>需要 train + 调参</td><td>无需，在线 ingest</td></tr>
+<tr><td>压缩</td><td>PQ 8-bit (~8x)</td><td>2/4-bit (16x)</td></tr>
+<tr><td>ARM 性能</td><td>一般</td><td><strong>快 12-20%</strong></td></tr>
+<tr><td>集成成本</td><td>需适配</td><td><code>pip install</code> 即替换</td></tr>
+<tr><td>过滤搜索</td><td>先搜再过滤</td><td>内核级 allowlist</td></tr>
+<tr><td>生态成熟度</td><td>极成熟</td><td>早期，一人项目</td></tr>
+</table>
+
+<h2>个人判断</h2>
+
+<p><strong>直接用。</strong> 不是"研究一下"的程度。</p>
+
+<p>对 H.OS 的向量存储层来说，turbovec 提供的 16 倍压缩 + ARM 原生加速 + 无需训练 + 框架集成，基本上是零成本升级。在 M3 Max 上比 FAISS 快 12-20%，这对 OTA 简报和知识库的实时性直接有利。</p>
+
+<h3>什么时候用</h3>
+<ul>
+<li>需要用 embedding 做语义搜索的任何 H.OS 组件</li>
+<li>内存敏感的本地部署场景</li>
+<li>需要纯本地/离线 RAG 的场景</li>
+</ul>
+
+<h3>什么时候不用</h3>
+<ul>
+<li>已经深度绑定 FAISS 特定功能且迁移成本高</li>
+<li>需要完全成熟的社区生态和长期维护保证（一人项目风险）</li>
+</ul>
+
+<h3>建议行动</h3>
+<ol>
+<li><code>pip install turbovec</code> 在 Mac Mini 上跑 benchmark</li>
+<li>对比当前 H.OS 向量存储的 recall 和速度</li>
+<li>如果满足需求，并入 H.OS RAG 管道</li>
+</ol>
+
+<h2>TODO</h2>
+
+<ul>
+<li>[ ] <code>pip install turbovec</code> 实测 benchmark</li>
+<li>[ ] 对比当前 FAISS 方案的 recall/speed/memory</li>
+<li>[ ] 如通过，替换 H.OS 向量存储层</li>
+</ul>
+
+<footer>
+  <p>Tech Watchlist · <a href="turbovec.md">查看 Markdown 源文件</a></p>
+</footer>
+
+</div>
+</body>
+</html>
