@@ -12,6 +12,7 @@
 1. [GEOFlow](./technologies/geoflow.md) — 酒店 GEO 内容多平台分发
 2. [Mega-ASR](./technologies/mega-asr.md) — 抗噪语音识别，适合酒店边缘部署
 3. [amap-lbs](./technologies/amap-lbs.md) — 高德地图 LBS 服务（POI/路线/热力图）
+13. [Tel-Agent](./technologies/tel-agent.md) — 开源 AI 电话网关：来电分流 → AI 对话 → 转人工，录音转写可检索（自托管，AGPL-3.0）
 
 ### AI 知识管理
 4. [Synthadoc](./technologies/synthadoc.md) — LLM 文档→结构化 Wiki
@@ -36,4 +37,4 @@
 - **与我相关** — 能否融入 Trinity / 酒店业务 / 知识管理体系
 - **个人判断** — 值得投入多少精力关注
 
-*更新于 2026年5月*
+*更新于 2026年9月*
